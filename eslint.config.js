@@ -18,6 +18,9 @@ export default defineConfig([
       eslintReact.configs.recommended,
       eslintPluginTailwindcss.configs.recommended,
     ],
+    rules: {
+      "no-unused-vars": "warn",
+    },
     settings: {
       tailwindcss: {
         cssConfigPath: "./src/index.css",
