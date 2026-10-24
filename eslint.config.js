@@ -18,10 +18,11 @@ export default defineConfig([
       eslintReact.configs.recommended,
       eslintPluginTailwindcss.configs.recommended,
     ],
-        settings: {
+    settings: {
       tailwindcss: {
         cssConfigPath: "./src/index.css",
       },
+    },
 
     languageOptions: {
       globals: globals.browser,
