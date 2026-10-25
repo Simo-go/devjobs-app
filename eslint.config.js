@@ -20,6 +20,7 @@ export default defineConfig([
     ],
     rules: {
       "no-unused-vars": "warn",
+      "tailwindcss/no-custom-classname": "off",
     },
     settings: {
       tailwindcss: {

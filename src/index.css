@@ -66,3 +66,11 @@
   font-weight: var(--font-weight-bold);
   line-height: 1.2;
 }
+
+@utility grid-cols-autofit-* {
+  grid-template-columns: repeat(auto-fit, minmax(--value([length]), 1fr));
+}
+
+@utility grid-cols-autofill-* {
+  grid-template-columns: repeat(auto-fill, minmax(--value([length]), 1fr));
+}
