@@ -40,7 +40,7 @@ Form.Input = function ({ name, className, ...props }) {
       {...props}
       className={clsx(
         className,
-        "w-full truncate text-preset-4-regular text-slate-950 outline-0 placeholder-shown:text-ellipsis",
+        "w-full truncate text-preset-4-regular text-slate-950 outline-0 placeholder-shown:text-ellipsis autofill:shadow-[inset_0_0_0_1000px_white]",
       )}
       value={formState[name] ?? ""}
       onChange={(e) => updateField(name, e.target.value)}

@@ -47,7 +47,10 @@ function Search() {
             <hr className="-mx-6 border-0 border-b border-slate-500/20" />
             <Form.InputContainer>
               <Form.Checkbox name="is-full-time" />
-              <Form.Label className="cursor-pointer" htmlFor="is-full-time">
+              <Form.Label
+                className="cursor-pointer text-preset-4-bold"
+                htmlFor="is-full-time"
+              >
                 Full-Time Only
               </Form.Label>
             </Form.InputContainer>
