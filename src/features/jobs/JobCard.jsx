@@ -1,4 +1,5 @@
-import CompanyLogo from "./CompanyLogo";
+import JobDetails from "./JobDetails";
+import JobHeader from "./JobHeader";
 
 const job_posting = {
   id: 1,
@@ -39,32 +40,8 @@ const job_posting = {
 function JobCard() {
   return (
     <article className="relative row-span-3 grid grid-rows-subgrid gap-0 rounded-md bg-neutral-0 px-8 pt-12 pb-5">
-      <header className="mb-3">
-        <CompanyLogo imgPath="" />
-        <span className="mb-1 block text-prest-5 text-sm text-[.75rem] font-medium tracking-wide text-slate-500 uppercase">
-          Scoot
-        </span>
-        <h2 className="text-preset-3 text-slate-900">
-          Senior Software Engineer
-        </h2>
-      </header>
-      <section className="mb-6">
-        <p className="line-clamp-2 text-prest-5 leading-relaxed font-normal text-[#7F8FA4]">
-          Scoot is looking for a Senior Software Engineer passionate about
-          building approachable, innovative and user-first experiences to join
-          our small but growing Engineering team.
-        </p>
-      </section>
-      <footer className="flex items-center justify-between gap-1">
-        <address className="grow text-prest-5 text-indigo-500 not-italic">
-          United Kingdom
-        </address>
-        <div className="flex flex-wrap items-center justify-end gap-x-2 gap-y-0 text-sm text-[#7F8FA4]">
-          <span className="shrink-0 text-sm">5h ago</span>
-          <span className="shrink-0">&middot;</span>
-          <span className="shrink-0">Full Time</span>
-        </div>
-      </footer>
+      <JobHeader />
+      <JobDetails />
     </article>
   );
 }

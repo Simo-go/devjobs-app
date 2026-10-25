@@ -1,20 +1,19 @@
 import { Outlet } from "react-router";
-import Navbar from "./Navbar";
-import Main from "./Main";
-import Header from "./Header";
-import Search from "../features/filters/Search";
 import Container from "./Container";
+import Header from "./Header";
+import Main from "./Main";
+import Navbar from "./Navbar";
 
 function AppLayout() {
   return (
-    <div className="bg-slate-100">
+    <div className="grid min-h-svh grid-rows-[auto_auto_auto_1fr] bg-slate-100">
       <Header>
-        <Container>
+        <Container className="py-8">
           <Navbar />
         </Container>
       </Header>
       <Main>
-        <Container>
+        <Container className="row-span-3 grid grid-rows-subgrid">
           <Outlet />
         </Container>
       </Main>
