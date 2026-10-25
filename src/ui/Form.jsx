@@ -4,6 +4,7 @@
 import clsx from "clsx";
 import { createContext, useContext, useState } from "react";
 import Button from "./Button";
+import Checkbox from "./Checkbox";
 
 const FormContext = createContext();
 
@@ -35,8 +36,12 @@ Form.Input = function ({ name, className, ...props }) {
 
   return (
     <input
+      id={name}
       {...props}
-      className={clsx(className)}
+      className={clsx(
+        className,
+        "w-full truncate text-preset-4-regular text-slate-950 outline-0 placeholder-shown:text-ellipsis",
+      )}
       value={formState[name] ?? ""}
       onChange={(e) => updateField(name, e.target.value)}
     />
@@ -48,9 +53,9 @@ Form.Checkbox = function ({ name, className, ...props }) {
   const isChecked = Boolean(formState[name]);
 
   return (
-    <input
+    <Checkbox
+      id={name}
       {...props}
-      className={clsx(className)}
       type="checkbox"
       checked={isChecked}
       onChange={(e) => updateField(name, e.target.checked)}
@@ -69,11 +74,17 @@ Form.Submit = function ({ children, ...props }) {
 };
 
 // Form.Button = function () {};
-Form.Label = function ({ className, children, ...props }) {
+Form.Label = function ({ htmlFor, className, children, ...props }) {
   return (
-    <label {...props} className={clsx(className)}>
+    <label {...props} htmlFor={htmlFor} className={clsx(className)}>
       {children}
     </label>
+  );
+};
+
+Form.InputContainer = function ({ className, children }) {
+  return (
+    <div className={clsx(className, "flex items-center gap-4")}>{children}</div>
   );
 };
 

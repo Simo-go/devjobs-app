@@ -1,12 +1,14 @@
 import clsx from "clsx";
 
-function Button({ children, className, size = "normal", ...props }) {
+function Button({ children, className, size, ...props }) {
   return (
     <button
       {...props}
 
       className={clsx(
-        "flex cursor-pointer items-center justify-center rounded-md bg-indigo-500 text-neutral-0 capitalize transition-colors duration-300 hover:bg-indigo-300",
+        "flex cursor-pointer items-center justify-center transition-colors duration-300",
+        size !== "icon" &&
+          "rounded-md bg-indigo-500 text-neutral-0 capitalize hover:bg-indigo-300",
         className,
         {
           "px-8 py-3": size === "large",
