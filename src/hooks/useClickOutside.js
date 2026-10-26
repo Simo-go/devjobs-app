@@ -5,15 +5,19 @@ export function useClickOutside(capture = true, ref, handler) {
     function () {
       function handleClose(e) {
         if (!ref.current || ref.current.contains(e.target)) return;
+        console.log(e.target);
+        console.log(ref.current);
+        console.log(ref.current.contains(e.target));
+        console.log(ref.current.querySelectorAll("*")[8]);
 
         handler();
       }
 
-      document.body.addEventListener("click", handleClose, true);
+      document.body.addEventListener("click", handleClose, capture);
 
       return () =>
-        document.body.removeEventListener("click", handleClose, true);
+        document.body.removeEventListener("click", handleClose, capture);
     },
-    [handler, ref],
+    [handler, ref, capture],
   );
 }
