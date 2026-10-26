@@ -2,15 +2,19 @@ import Button from "../../ui/Button";
 import JobLocation from "./JobLocation";
 import TimeAndContractType from "./TimeAndContractType";
 
-function JobHeader() {
+function JobHeader({ job }) {
+  const { position, location, createdAt, contract, apply } = job;
+
   return (
     <header className="mb-8 md:mb-10 md:flex md:items-center md:justify-between">
       <div>
-        <TimeAndContractType className="mb-1 text-preset-4-regular" />
-        <h2 className="mb-1 text-preset-1 text-slate-900">
-          Senior Software Engineer
-        </h2>
-        <JobLocation />
+        <TimeAndContractType
+          className="mb-1 text-preset-4-regular"
+          createdAt={createdAt}
+          contract={contract}
+        />
+        <h2 className="mb-1 text-preset-1 text-slate-900">{position}</h2>
+        <JobLocation location={location} />
       </div>
       <Button
         size="large"

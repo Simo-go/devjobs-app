@@ -1,7 +1,7 @@
-function JobLocation() {
+function JobLocation({ location }) {
   return (
     <address className="grow text-prest-5 text-indigo-500 not-italic">
-      United Kingdom
+      {location}
     </address>
   );
 }

@@ -3,12 +3,12 @@ import JobDetails from "./JobDetails";
 import JobFooter from "./JobFooter";
 import JobHeader from "./JobHeader";
 
-function JobBox() {
+function JobBox({ job }) {
   return (
     <Card className="px-6 py-10">
-      <JobHeader />
-      <JobDetails />
-      <JobFooter />
+      <JobHeader job={job} />
+      <JobDetails job={job} />
+      <JobFooter job={job} />
     </Card>
   );
 }

@@ -2,19 +2,20 @@ import Card from "../../ui/Card";
 import JobCardDetails from "./JobCardDetails";
 import JobCardHeader from "./JobCardHeader";
 
-const job_posting = {
+const job = {
   id: 1,
   position: "Senior Software Engineer",
   createdAt: new Date().toISOString(),
   contract: "full-time",
-  location: "United Kingdom",
-  website: "https://example.com/scoot",
+  location: "Nicosia",
   apply: "https://example.com/scoot/apply",
   description:
     "Scoot is looking for a Senior Software Engineer passionate about building approachable, innovative and user-first experiences to join our small but growing Engineering team. You will be responsible for building and maintaining front end functionality across all of Scoot’s applications, fostering a growing team of software engineers, and helping drive and maintain best software patterns and practices in our codebase.",
   company: {
     name: "Scoot",
     logo: "./assets/logos/scoot.svg",
+    bg_color: "#E99210",
+    website: "https://example.com/scoot",
   },
   requirements: {
     content:
@@ -44,8 +45,8 @@ function JobCard() {
       className="relative row-span-3 grid cursor-pointer grid-rows-subgrid gap-0 px-8 pt-12 pb-5 outline-offset-0 outline-transparent transition-all duration-300 hover:shadow-[0px_6px_20px_-10px_rgb(0_0_0/10%)] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-indigo-300"
       tabIndex={0}
     >
-      <JobCardHeader />
-      <JobCardDetails />
+      <JobCardHeader job={job} />
+      <JobCardDetails job={job} />
     </Card>
   );
 }

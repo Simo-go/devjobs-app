@@ -1,15 +1,16 @@
 import clsx from "clsx";
 
-function CompanyLogo({ className, size = "small" }) {
+function CompanyLogo({ className, size = "small", bgColor, imgPath }) {
   return (
     <div
-      className={clsx(className, "grid place-content-center bg-[#E99210]", {
+      style={{ backgroundColor: bgColor }}
+      className={clsx(className, "grid place-content-center", {
         "size-12.5 rounded-2xl": size === "small",
         "w-31.25 rounded-md": size === "large",
       })}
     >
       <img
-        src="/assets/logos/scoot.svg"
+        src={imgPath}
         alt=""
         className={clsx(size === "large" && "h-4.25 w-13.75")}
       />

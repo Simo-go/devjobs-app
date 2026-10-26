@@ -1,6 +1,7 @@
 import clsx from "clsx";
+import { capitalizeString } from "../../utils/helpers";
 
-function TimeAndContractType({ className }) {
+function TimeAndContractType({ className, createdAt, contract }) {
   return (
     <div
       className={clsx(
@@ -8,9 +9,9 @@ function TimeAndContractType({ className }) {
         className,
       )}
     >
-      <span className="shrink-0">5h ago</span>
+      <span className="shrink-0">{createdAt}</span>
       <span className="shrink-0">&middot;</span>
-      <span className="shrink-0">Full Time</span>
+      <span className="shrink-0">{capitalizeString(contract, "-")}</span>
     </div>
   );
 }
