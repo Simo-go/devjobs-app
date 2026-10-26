@@ -1,14 +1,15 @@
+import Card from "../../ui/Card";
 import JobDetails from "./JobDetails";
 import JobFooter from "./JobFooter";
 import JobHeader from "./JobHeader";
 
 function JobBox() {
   return (
-    <div className="bg-indigo-500">
+    <Card className="px-6 py-10">
       <JobHeader />
       <JobDetails />
       <JobFooter />
-    </div>
+    </Card>
   );
 }
 

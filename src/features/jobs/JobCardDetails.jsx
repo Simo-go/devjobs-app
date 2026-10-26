@@ -1,3 +1,6 @@
+import JobLocation from "./JobLocation";
+import TimeAndContractType from "./TimeAndContractType";
+
 function JobCardDetails() {
   return (
     <>
@@ -9,14 +12,8 @@ function JobCardDetails() {
         </p>
       </section>
       <footer className="flex items-center justify-between gap-1">
-        <address className="grow text-prest-5 text-indigo-500 not-italic">
-          United Kingdom
-        </address>
-        <div className="flex flex-wrap items-center justify-end gap-x-2 gap-y-0 text-sm text-[#7F8FA4]">
-          <span className="shrink-0 text-sm">5h ago</span>
-          <span className="shrink-0">&middot;</span>
-          <span className="shrink-0">Full Time</span>
-        </div>
+        <JobLocation />
+        <TimeAndContractType className="justify-end text-sm" />
       </footer>
     </>
   );
