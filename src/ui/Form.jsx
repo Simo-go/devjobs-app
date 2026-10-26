@@ -48,7 +48,7 @@ Form.Input = function ({ name, className, ...props }) {
   );
 };
 
-Form.Checkbox = function ({ name, className, ...props }) {
+Form.Checkbox = function ({ name, ...props }) {
   const { formState, updateField } = useContext(FormContext);
   const isChecked = Boolean(formState[name]);
 
@@ -82,14 +82,12 @@ Form.Label = function ({ htmlFor, className, children, ...props }) {
   );
 };
 
-Form.InputContainer = function ({ className, children }) {
-  return (
-    <div className={clsx(className, "flex items-center gap-4")}>{children}</div>
-  );
-};
+// Form.InputContainer = function ({ className, children }) {
+//   return <div className={clsx("flex items-center", className)}>{children}</div>;
+// };
 
 Form.Container = function ({ className, children }) {
-  return <div className={clsx(className)}>{children}</div>;
+  return <div className={clsx(className, "p-4 md:px-6")}>{children}</div>;
 };
 
 export default Form;

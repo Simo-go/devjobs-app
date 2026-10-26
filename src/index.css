@@ -30,6 +30,8 @@
 
   --radius-5xl: 2.5rem;
   --radius-6xl: 6.25rem;
+
+  --breakpoint-lg: 60rem; /* 960px */
 }
 
 @utility text-preset-1 {
