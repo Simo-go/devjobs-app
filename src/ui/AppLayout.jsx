@@ -6,14 +6,14 @@ import Navbar from "./Navbar";
 
 function AppLayout() {
   return (
-    <div className="grid min-h-svh grid-rows-[auto_auto_auto_1fr] bg-slate-100">
+    <div className="grid min-h-svh grid-rows-[auto_auto_auto_1fr_auto] bg-slate-100 pb-12">
       <Header>
         <Container className="py-8">
           <Navbar />
         </Container>
       </Header>
       <Main>
-        <Container className="row-span-3 grid grid-rows-subgrid">
+        <Container className="row-span-4 grid grid-rows-subgrid">
           <Outlet />
         </Container>
       </Main>

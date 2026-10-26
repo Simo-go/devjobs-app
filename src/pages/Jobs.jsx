@@ -1,16 +1,15 @@
 import Search from "../features/filters/Search.jsx";
-import JobCard from "../features/jobs/JobCard";
-import GridBox from "../ui/GridBox";
+import JobList from "../features/jobs/JobList.jsx";
+import Button from "../ui/Button.jsx";
 
 function Jobs() {
   return (
     <>
       <Search />
-      <GridBox className="gap-y-[ mt-14.25 grid-cols-autofit-[min(100%,18.5rem)] gap-x-4 gap-y-13.25">
-        {Array.from({ length: 5 }, (_, i) => (
-          <JobCard key={i} />
-        ))}
-      </GridBox>
+      <JobList />
+      <div className="flex items-center justify-center p-14 pb-0">
+        <Button className="px-8 py-3">Load more</Button>
+      </div>
     </>
   );
 }
