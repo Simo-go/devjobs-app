@@ -31,10 +31,10 @@ function Search() {
         </Form.Container>
 
         <Dialog.Window>
-          <Form.Container className="flex flex-col gap-6">
-            <LocationInput className="flex md:hidden" />
+          <Form.Container className="flex flex-col gap-6 p-0!">
+            <LocationInput className="flex p-0! md:hidden" />
             <hr className="-mx-6 border-0 border-b border-slate-500/20" />
-            <FullTimeCheckbox className="flex md:hidden" />
+            <FullTimeCheckbox className="flex p-0! md:hidden" />
             <Form.Submit className="w-full grow p-3.5">Search</Form.Submit>
           </Form.Container>
         </Dialog.Window>
