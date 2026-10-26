@@ -1,7 +1,18 @@
-function CompanyLogo() {
+import clsx from "clsx";
+
+function CompanyLogo({ className, size = "small" }) {
   return (
-    <div className="absolute top-0 left-8 grid size-12.5 translate-y-[-50%] place-content-center rounded-2xl bg-[#E99210]">
-      <img src="/assets/logos/scoot.svg" alt="" />
+    <div
+      className={clsx(className, "grid place-content-center bg-[#E99210]", {
+        "size-12.5 rounded-2xl": size === "small",
+        "w-31.25 rounded-md": size === "large",
+      })}
+    >
+      <img
+        src="/assets/logos/scoot.svg"
+        alt=""
+        className={clsx(size === "large" && "h-4.25 w-13.75")}
+      />
     </div>
   );
 }

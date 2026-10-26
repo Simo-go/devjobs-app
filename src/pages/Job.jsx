@@ -1,5 +1,13 @@
+import CompanyCard from "../features/jobs/CompanyCard";
+import JobBox from "../features/jobs/JobBox";
+
 function Job() {
-  return <div></div>;
+  return (
+    <>
+      <CompanyCard />
+      <JobBox />
+    </>
+  );
 }
 
 export default Job;

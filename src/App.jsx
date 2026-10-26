@@ -7,6 +7,7 @@ import Bookmarks from "./pages/Bookmarks";
 import Applications from "./pages/Applications";
 import Dashboard from "./pages/Dashboard";
 import AppLayout from "./ui/AppLayout";
+import JobLayout from "./ui/JobLayout";
 
 function App() {
   return (
@@ -15,10 +16,12 @@ function App() {
         <Route index element={<Navigate to="/home" replace />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route element={<JobLayout />}>
+          <Route path="/home" element={<Jobs />} />
+        </Route>
         <Route element={<AppLayout />}>
           {/* <Route index element={<Navigate to="/home" replace />} /> */}
-          <Route path="/home" element={<Jobs />} />
-          <Route path="job:id" element={<Job />} />
+          <Route path="job" element={<Job />} />
           <Route path="/bookmarks" element={<Bookmarks />} />
           <Route path="/applications" element={<Applications />} />
           <Route path="/dashboard" element={<Dashboard />} />

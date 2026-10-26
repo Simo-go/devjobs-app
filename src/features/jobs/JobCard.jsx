@@ -1,5 +1,6 @@
-import JobDetails from "./JobDetails";
-import JobHeader from "./JobHeader";
+import Card from "../../ui/Card";
+import JobCardDetails from "./JobCardDetails";
+import JobCardHeader from "./JobCardHeader";
 
 const job_posting = {
   id: 1,
@@ -39,10 +40,10 @@ const job_posting = {
 
 function JobCard() {
   return (
-    <article className="relative row-span-3 grid grid-rows-subgrid gap-0 rounded-md bg-neutral-0 px-8 pt-12 pb-5">
-      <JobHeader />
-      <JobDetails />
-    </article>
+    <Card className="relative row-span-3 grid grid-rows-subgrid gap-0 px-8 pt-12 pb-5">
+      <JobCardHeader />
+      <JobCardDetails />
+    </Card>
   );
 }
 

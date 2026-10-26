@@ -1,9 +1,7 @@
-function Main({ children }) {
-  return (
-    <main className="col-start-1 col-end-2 row-[2/span_4] grid grid-rows-subgrid">
-      {children}
-    </main>
-  );
+import clsx from "clsx";
+
+function Main({ children, className }) {
+  return <main className={clsx(className)}>{children}</main>;
 }
 
 export default Main;
