@@ -4,12 +4,7 @@ import Form from "../../ui/Form";
 
 function LocationInput({ className }) {
   return (
-    <Form.Container
-      className={clsx(
-        "items-center gap-4 border-r-slate-900/20 md:border-r",
-        className,
-      )}
-    >
+    <Form.InputContainer className={clsx("md:border-r", className)}>
       <Form.Label
         htmlFor="location"
         className="text-indigo-500 transition-colors duration-300 [&:has(+input:focus)]:text-indigo-300"
@@ -17,7 +12,7 @@ function LocationInput({ className }) {
         <IconLocation />
       </Form.Label>
       <Form.Input name="location" placeholder="Filter by location" />
-    </Form.Container>
+    </Form.InputContainer>
   );
 }
 

@@ -19,7 +19,7 @@ function Search() {
         handleSubmit={handleSearch}
       >
         <JobDetailsInput />
-        <LocationInput className="hidden md:flex" />
+        <LocationInput className="hidden items-center gap-4 md:flex" />
         <Form.Container className="flex items-center gap-6">
           <FullTimeCheckbox className="hidden md:flex" />
           <Dialog.Button size="icon" className="md:hidden">
@@ -32,7 +32,7 @@ function Search() {
 
         <Dialog.Window>
           <Form.Container className="flex flex-col gap-6 p-0!">
-            <LocationInput className="flex p-0! md:hidden" />
+            <LocationInput className="flex items-center gap-4 p-0! md:hidden" />
             <hr className="-mx-6 border-0 border-b border-slate-500/20" />
             <FullTimeCheckbox className="flex p-0! md:hidden" />
             <Form.Submit className="w-full grow p-3.5">Search</Form.Submit>

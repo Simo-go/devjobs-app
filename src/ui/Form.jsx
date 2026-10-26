@@ -82,9 +82,18 @@ Form.Label = function ({ htmlFor, className, children, ...props }) {
   );
 };
 
-// Form.InputContainer = function ({ className, children }) {
-//   return <div className={clsx("flex items-center", className)}>{children}</div>;
-// };
+Form.InputContainer = function ({ className, children }) {
+  return (
+    <Form.Container
+      className={clsx(
+        "border-r-slate-900/20 transition-shadow has-focus-visible:ring-2 has-focus-visible:ring-indigo-300 has-focus-visible:ring-inset",
+        className,
+      )}
+    >
+      {children}
+    </Form.Container>
+  );
+};
 
 Form.Container = function ({ className, children }) {
   return <div className={clsx(className, "p-4 md:px-6")}>{children}</div>;

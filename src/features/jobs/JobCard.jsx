@@ -40,7 +40,10 @@ const job_posting = {
 
 function JobCard() {
   return (
-    <Card className="relative row-span-3 grid grid-rows-subgrid gap-0 px-8 pt-12 pb-5">
+    <Card
+      className="relative row-span-3 grid cursor-pointer grid-rows-subgrid gap-0 px-8 pt-12 pb-5 outline-offset-0 outline-transparent transition-all duration-300 hover:shadow-[0px_6px_20px_-10px_rgb(0_0_0/10%)] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-indigo-300"
+      tabIndex={0}
+    >
       <JobCardHeader />
       <JobCardDetails />
     </Card>
