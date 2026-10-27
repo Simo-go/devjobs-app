@@ -1,5 +1,6 @@
 import CompanyCard from "../features/jobs/CompanyCard";
 import JobBox from "../features/jobs/JobBox";
+import JobPosting from "../features/jobs/JobPosting";
 
 const job = {
   id: 1,
@@ -39,12 +40,7 @@ const job = {
 };
 
 function Job() {
-  return (
-    <div className="pb-40">
-      <CompanyCard job={job} />
-      <JobBox job={job} />
-    </div>
-  );
+  return <JobPosting job={job} />;
 }
 
 export default Job;

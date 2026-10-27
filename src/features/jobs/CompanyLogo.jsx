@@ -6,7 +6,7 @@ function CompanyLogo({ className, size = "small", bgColor, imgPath }) {
       style={{ backgroundColor: bgColor }}
       className={clsx(className, "grid place-content-center", {
         "size-12.5 rounded-2xl": size === "small",
-        "w-31.25 rounded-md": size === "large",
+        "w-31.25 shrink-0 rounded-md": size === "large",
       })}
     >
       <img
