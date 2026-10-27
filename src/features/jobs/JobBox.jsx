@@ -8,6 +8,7 @@ function JobBox({ job }) {
     <Card className="px-6 py-10">
       <JobHeader job={job} />
       <JobDetails job={job} />
+      <hr className="-mx-6 mb-10 hidden text-slate-300/30 md:block" />
       <JobFooter job={job} />
     </Card>
   );

@@ -13,7 +13,7 @@ function JobHeader({ job }) {
           createdAt={createdAt}
           contract={contract}
         />
-        <h2 className="mb-1 text-preset-1 text-slate-900">{position}</h2>
+        <h2 className="mb-1 text-preset-2 text-slate-900">{position}</h2>
         <JobLocation location={location} />
       </div>
       <Button
