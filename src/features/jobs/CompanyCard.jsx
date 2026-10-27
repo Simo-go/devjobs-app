@@ -17,7 +17,13 @@ function CompanyCard({ job }) {
       />
       <div className="flex grow flex-wrap items-center justify-between gap-2 p-6">
         <h2 className="text-preset-3 text-slate-900">{companyName}</h2>
-        <Button variant="secondary" size="normal">
+        <Button
+          variant="secondary"
+          size="normal"
+          link
+          to={website}
+          target="_blank"
+        >
           company site
         </Button>
       </div>
