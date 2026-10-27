@@ -1,3 +1,5 @@
+import { populateJobs } from "../../services/apiJobs";
+import { supabase } from "../../services/supabase";
 import GridBox from "../../ui/GridBox";
 import JobCard from "./JobCard";
 
