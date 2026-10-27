@@ -26,6 +26,9 @@ function JobFooter({ job }) {
               size="large"
               variant="primary"
               className="text-prest-5! duration-400! xs:text-preset-4-bold!"
+              link
+              to={apply}
+              target="_blank"
             >
               Apply Now
             </Button>
@@ -44,6 +47,8 @@ function JobFooter({ job }) {
           size="large"
           variant="primary"
           className="text-prest-5! duration-400! xs:text-preset-4-bold!"
+          link
+          to={apply}
         >
           Apply Now
         </Button>
