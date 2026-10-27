@@ -2,7 +2,13 @@ import { createPortal } from "react-dom";
 import Button from "../../ui/Button";
 import Container from "../../ui/Container";
 
-function JobFooter() {
+function JobFooter({ job }) {
+  const {
+    position,
+    company: { name: companyName },
+    apply,
+  } = job;
+
   return (
     <>
       {createPortal(
@@ -10,10 +16,10 @@ function JobFooter() {
           <Container className="flex items-center justify-between gap-2">
             <div>
               <h2 className="mb-1 text-preset-4-bold text-slate-900 xs:text-preset-3">
-                Senior Software Engineer
+                {position}
               </h2>
               <span className="text-preset-4-regular text-slate-500">
-                Scoot
+                {companyName}
               </span>
             </div>
             <Button
