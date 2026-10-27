@@ -1,27 +1,48 @@
 import { createPortal } from "react-dom";
 import Button from "../../ui/Button";
+import Container from "../../ui/Container";
 
-function JobFooter({ portal }) {
-  if (portal)
-    return createPortal(
-      <div className="fixed bottom-0 flex w-full bg-neutral-0/70 p-4 py-6 backdrop-blur-xs md:hidden">
+function JobFooter() {
+  return (
+    <>
+      {createPortal(
+        <div className="fixed bottom-0 w-full bg-neutral-0/90 py-6 backdrop-blur-xs md:hidden">
+          <Container className="flex items-center justify-between gap-2">
+            <div>
+              <h2 className="mb-1 text-preset-4-bold text-slate-900 xs:text-preset-3">
+                Senior Software Engineer
+              </h2>
+              <span className="text-preset-4-regular text-slate-500">
+                Scoot
+              </span>
+            </div>
+            <Button
+              size="large"
+              variant="primary"
+              className="text-prest-5! duration-400! xs:text-preset-4-bold!"
+            >
+              Apply Now
+            </Button>
+          </Container>
+        </div>,
+        document.body,
+      )}
+      <footer className="hidden items-center justify-between gap-2 rounded-b-md md:flex">
+        <div>
+          <h2 className="mb-1 text-preset-4-bold text-slate-900 xs:text-preset-3">
+            Senior Software Engineer
+          </h2>
+          <span className="text-preset-4-regular text-slate-500">Scoot</span>
+        </div>
         <Button
           size="large"
           variant="primary"
-          className="mx-auto w-[80%] duration-400"
+          className="text-prest-5! duration-400! xs:text-preset-4-bold!"
         >
           Apply Now
         </Button>
-      </div>,
-      document.body,
-    );
-
-  return (
-    <footer>
-      <Button size="large" variant="primary">
-        Apply Now
-      </Button>
-    </footer>
+      </footer>
+    </>
   );
 }
 
