@@ -21,7 +21,7 @@ function JobList() {
 
   return (
     <>
-      <GridBox className="gap-y-[ mt-14.25 grid-cols-autofit-[min(100%,18.5rem)] gap-x-4 gap-y-13.25">
+      <GridBox className="gap-y-[ mt-14.25 grid-cols-autofill-[min(100%,18.5rem)] content-start gap-x-4 gap-y-13.25">
         {jobs.map((job) => (
           <JobCard key={job.id} job={job} />
         ))}
