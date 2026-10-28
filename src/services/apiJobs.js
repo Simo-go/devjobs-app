@@ -1,12 +1,5 @@
+import { LIMIT } from "../utils/constants";
 import { supabase } from "./supabase";
-import jobs from "../data.json";
-
-export async function getJobs() {
-  const { data, error } = await supabase.from("jobs").select("*, companies(*)");
-  console.log(data);
-}
-
-getJobs();
 
 export async function addBulkNoForeignKey(table, dataArr) {
   const { data, error } = await supabase.from(table).insert(dataArr).select();
@@ -55,3 +48,57 @@ export async function insertJob(job) {
 export async function populateJobs(jobs) {
   jobs.forEach((job) => insertJob(job));
 }
+
+export async function getJobs({
+  nextCursor = new Date().toISOString(),
+  nextCursorId,
+}) {
+  let idLatestJob, idError;
+  if (!nextCursorId) {
+    const { data, error } = await supabase
+      .from("jobs")
+      .select("id")
+      .order("created_at", { ascending: false })
+      .limit(1);
+    idLatestJob = data[0].id;
+    idError = error;
+  }
+
+  if (idError) throw new Error(idError.message);
+  console.log(idLatestJob);
+
+  const { data, error } = await supabase
+    .from("jobs")
+    .select(
+      `
+    id,
+    position,
+    createdAt:created_at,
+    contract,
+    description,
+    requirements,
+    role,
+    location,
+    ...companies!inner(
+      companyName:name,
+      logoUrl:logo_url,
+      logoBgColor:logo_bg_color
+    )
+    `,
+    )
+    .lt("created_at", nextCursor)
+    .lt("id", nextCursorId ?? idLatestJob)
+    .order("created_at", {
+      ascending: false,
+    })
+    .order("id", { ascending: false })
+    .limit(LIMIT);
+
+  if (error) throw new Error(error.message);
+
+  console.log(data);
+
+  return data;
+}
+
+getJobs({ nextCursorId: 174 });
