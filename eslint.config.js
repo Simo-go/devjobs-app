@@ -4,6 +4,7 @@ import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
 import eslintReact from "@eslint-react/eslint-plugin";
 import eslintPluginTailwindcss from "eslint-plugin-tailwindcss";
+import pluginQuery from "@tanstack/eslint-plugin-query";
 
 import { defineConfig, globalIgnores } from "eslint/config";
 
@@ -17,6 +18,7 @@ export default defineConfig([
       reactRefresh.configs.vite,
       eslintReact.configs.recommended,
       eslintPluginTailwindcss.configs.recommended,
+      ...pluginQuery.configs["flat/recommended"],
     ],
     rules: {
       "no-unused-vars": "warn",

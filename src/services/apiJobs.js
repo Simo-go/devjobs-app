@@ -1,6 +1,13 @@
 import { supabase } from "./supabase";
 import jobs from "../data.json";
 
+export async function getJobs() {
+  const { data, error } = await supabase.from("jobs").select("*, companies(*)");
+  console.log(data);
+}
+
+getJobs();
+
 export async function addBulkNoForeignKey(table, dataArr) {
   const { data, error } = await supabase.from(table).insert(dataArr).select();
 
@@ -48,6 +55,3 @@ export async function insertJob(job) {
 export async function populateJobs(jobs) {
   jobs.forEach((job) => insertJob(job));
 }
-
-populateJobs(jobs);
-console.log(jobs.length);
