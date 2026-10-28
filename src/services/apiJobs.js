@@ -50,11 +50,11 @@ export async function populateJobs(jobs) {
 }
 
 export async function getJobs({
-  nextCursor = new Date().toISOString(),
-  nextCursorId,
+  currentCursor = new Date().toISOString(),
+  currentCursorId,
 }) {
   let idLatestJob, idError;
-  if (!nextCursorId) {
+  if (!currentCursorId) {
     const { data, error } = await supabase
       .from("jobs")
       .select("id")
@@ -65,7 +65,6 @@ export async function getJobs({
   }
 
   if (idError) throw new Error(idError.message);
-  console.log(idLatestJob);
 
   const { data, error } = await supabase
     .from("jobs")
@@ -86,8 +85,8 @@ export async function getJobs({
     )
     `,
     )
-    .lt("created_at", nextCursor)
-    .lt("id", nextCursorId ?? idLatestJob)
+    .lt("created_at", currentCursor)
+    .lt("id", currentCursorId ?? idLatestJob)
     .order("created_at", {
       ascending: false,
     })
@@ -96,9 +95,9 @@ export async function getJobs({
 
   if (error) throw new Error(error.message);
 
-  console.log(data);
+  if (data.length !== LIMIT) return { data };
 
-  return data;
+  const { id: nextCursorId, createdAt: nextCursor } = data.at(-1);
+
+  return { data, nextCursor: { nextCursor, nextCursorId } };
 }
-
-getJobs({ nextCursorId: 174 });

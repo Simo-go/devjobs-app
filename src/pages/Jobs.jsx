@@ -7,9 +7,6 @@ function Jobs() {
     <>
       <Search />
       <JobList />
-      <div className="flex items-center justify-center p-14 pb-0">
-        <Button className="px-8 py-3">Load more</Button>
-      </div>
     </>
   );
 }

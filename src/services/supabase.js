@@ -6,5 +6,3 @@ export const supabase = createClient(
   "https://btxtrifrmcklypeljttx.supabase.co",
   SUPABASE_KEY,
 );
-
-console.log(supabase);
