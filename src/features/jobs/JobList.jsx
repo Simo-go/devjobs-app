@@ -2,11 +2,22 @@ import { populateJobs } from "../../services/apiJobs";
 import { supabase } from "../../services/supabase";
 import Button from "../../ui/Button";
 import GridBox from "../../ui/GridBox";
+import LoadingSpinner from "../../ui/LoadingSpinner";
 import JobCard from "./JobCard";
 import { useJobs } from "./useJobs";
 
 function JobList() {
-  const { fetchNextPage, jobs } = useJobs();
+  const {
+    jobs,
+    error,
+    isPending,
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+    isFetchingNextPage,
+  } = useJobs();
+
+  if (isPending) return <LoadingSpinner />;
 
   return (
     <>
