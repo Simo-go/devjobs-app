@@ -1,6 +1,5 @@
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { getJobs } from "../../services/apiJobs";
-import { useEffect } from "react";
 
 export function useJobs() {
   const {
@@ -12,9 +11,7 @@ export function useJobs() {
     hasNextPage,
     isFetching,
     isFetchingNextPage,
-    status,
     failureReason,
-    fetchStatus,
     refetch,
     isFetchNextPageError,
     isLoadingError,
@@ -37,10 +34,6 @@ export function useJobs() {
   });
 
   const jobs = data?.pages.flatMap((page) => page.data) ?? []; // all jobs are given, but no re-render of the already existing jobs due to their key prop.
-
-  console.log("INFORMATION---------");
-  console.log(status);
-  console.log(fetchStatus);
 
   return {
     jobs,

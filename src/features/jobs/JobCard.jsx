@@ -1,3 +1,4 @@
+import { Link, useNavigate } from "react-router";
 import Card from "../../ui/Card";
 import JobCardDetails from "./JobCardDetails";
 import JobCardHeader from "./JobCardHeader";
@@ -40,14 +41,21 @@ import JobCardHeader from "./JobCardHeader";
 // };
 
 function JobCard({ job }) {
+  const navigate = useNavigate();
+
   return (
-    <Card
-      className="relative row-span-3 grid cursor-pointer grid-rows-subgrid gap-0 px-8 pt-12 pb-5 outline-offset-0 outline-transparent transition-all duration-300 hover:shadow-[0px_6px_20px_-10px_rgb(0_0_0/10%)] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-indigo-300"
-      tabIndex={0}
+    <Link
+      to={`/job/${job.companyName}/${job.id}`}
+      className="row-span-3 grid grid-rows-subgrid"
     >
-      <JobCardHeader job={job} />
-      <JobCardDetails job={job} />
-    </Card>
+      <Card
+        className="relative row-span-3 grid cursor-pointer grid-rows-subgrid gap-0 px-8 pt-12 pb-5 outline-offset-0 outline-transparent transition-all duration-300 hover:shadow-[0px_6px_20px_-10px_rgb(0_0_0/10%)] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-indigo-300"
+        tabIndex={0}
+      >
+        <JobCardHeader job={job} />
+        <JobCardDetails job={job} />
+      </Card>
+    </Link>
   );
 }
 
