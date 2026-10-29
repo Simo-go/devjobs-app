@@ -1,5 +1,8 @@
+import { useParams } from "react-router";
 import CompanyCard from "./CompanyCard";
 import JobBox from "./JobBox";
+import { useJob } from "./useJob";
+import LoadingSpinner from "../../ui/LoadingSpinner";
 
 const job = {
   id: 1,
@@ -39,6 +42,14 @@ const job = {
 };
 
 function JobPosting() {
+  const { id } = useParams();
+
+  const { job, error, isPending } = useJob(id);
+
+  if (isPending) return <LoadingSpinner />;
+
+  if (error) return <Error>{error.message}</Error>;
+
   return (
     <div className="mx-auto max-w-182.5 pb-40 md:pb-10">
       <CompanyCard job={job} />

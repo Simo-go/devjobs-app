@@ -1,4 +1,5 @@
 import { LIMIT } from "../utils/constants";
+import { normalizeObjectKeys } from "../utils/helpers";
 import { supabase } from "./supabase";
 
 export async function addBulkNoForeignKey(table, dataArr) {
@@ -100,4 +101,26 @@ export async function getJobs({
   const { id: nextCursorId, createdAt: nextCursor } = data.at(-1);
 
   return { data, nextCursor: { nextCursor, nextCursorId } };
+}
+
+export async function getJob(id) {
+  const { data, error } = await supabase
+    .from("jobs")
+    .select(
+      `
+      *,
+      ...companies(
+        logoBgColor:logo_bg_color,
+        logoUrl:logo_url,
+        companyName:name,
+        websiteUrl:website_url
+      )`,
+    )
+    .eq("id", id);
+
+  if (error) throw new Error(error.message);
+
+  const normalizedData = normalizeObjectKeys(data[0]);
+
+  return normalizedData;
 }

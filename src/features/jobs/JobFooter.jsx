@@ -3,11 +3,7 @@ import Button from "../../ui/Button";
 import Container from "../../ui/Container";
 
 function JobFooter({ job }) {
-  const {
-    position,
-    company: { name: companyName },
-    apply,
-  } = job;
+  const { position, companyName, applyUrl } = job;
 
   return (
     <>
@@ -27,7 +23,7 @@ function JobFooter({ job }) {
               variant="primary"
               className="text-prest-5! duration-400! xs:text-preset-4-bold!"
               link
-              to={apply}
+              to={applyUrl}
               target="_blank"
             >
               Apply Now
@@ -48,7 +44,7 @@ function JobFooter({ job }) {
           variant="primary"
           className="text-prest-5! duration-400! xs:text-preset-4-bold!"
           link
-          to={apply}
+          to={applyUrl}
         >
           Apply Now
         </Button>
