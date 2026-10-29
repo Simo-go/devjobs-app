@@ -10,7 +10,7 @@ function Button({
   ...props
 }) {
   const styles = [
-    "flex cursor-pointer items-center justify-center text-nowrap ring-transparent ring-offset-0 transition-[background-color,box-shadow] duration-300 outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2",
+    "flex cursor-pointer items-center justify-center text-nowrap ring-transparent ring-offset-0 transition-[background-color,box-shadow] duration-300 outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 disabled:bg-indigo-300 disabled:cursor-not-allowed",
     {
       "px-8 py-3": size === "large",
       "px-4 py-3": size === "normal",
