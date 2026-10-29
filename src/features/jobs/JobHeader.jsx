@@ -3,7 +3,7 @@ import JobLocation from "./JobLocation";
 import TimeAndContractType from "./TimeAndContractType";
 
 function JobHeader({ job }) {
-  const { position, location, createdAt, contract, apply } = job;
+  const { position, location, createdAt, contract, applyUrl } = job;
 
   return (
     <header className="mb-8 md:mb-10 md:flex md:items-center md:justify-between">
@@ -20,6 +20,9 @@ function JobHeader({ job }) {
         size="large"
         variant="primary"
         className="hidden text-preset-4-bold font-bold md:block"
+        link
+        to={applyUrl}
+        target="_blank"
       >
         Apply Now
       </Button>

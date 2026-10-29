@@ -35,9 +35,11 @@ function JobFooter({ job }) {
       <footer className="hidden items-center justify-between gap-2 rounded-b-md md:flex">
         <div>
           <h2 className="mb-1 text-preset-4-bold text-slate-900 xs:text-preset-3">
-            Senior Software Engineer
+            {position}
           </h2>
-          <span className="text-preset-4-regular text-slate-500">Scoot</span>
+          <span className="text-preset-4-regular text-slate-500">
+            {companyName}
+          </span>
         </div>
         <Button
           size="large"
@@ -45,6 +47,7 @@ function JobFooter({ job }) {
           className="text-prest-5! duration-400! xs:text-preset-4-bold!"
           link
           to={applyUrl}
+          target="_blank"
         >
           Apply Now
         </Button>
