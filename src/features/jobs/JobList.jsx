@@ -1,11 +1,11 @@
 /* eslint-disable no-constant-condition */
-import React from "react";
+import Error from "../../pages/Error";
 import Button from "../../ui/Button";
 import GridBox from "../../ui/GridBox";
+import { LIMIT } from "../../utils/constants";
 import JobCard from "./JobCard";
 import JobsSkeleton from "./JobsSkeleton";
 import { useJobs } from "./useJobs";
-import { LIMIT } from "../../utils/constants";
 
 function JobList() {
   const {
@@ -16,8 +16,29 @@ function JobList() {
     hasNextPage,
     isFetching,
     isFetchingNextPage,
+    failureReason,
+    isPaused,
+    refetch,
+    isFetchNextPageError,
+    isLoadingError,
   } = useJobs();
-  console.log(isFetching);
+
+  const isInitialLoadingPaused = isPending && isPaused && failureReason;
+
+  if (isInitialLoadingPaused)
+    return (
+      <>
+        <Error>Waiting for connection...</Error>
+      </>
+    );
+
+  if (isLoadingError)
+    // initial loading error
+    return (
+      <Error refetch={refetch} retry>
+        Please retry at a later time.
+      </Error>
+    );
 
   return (
     <>
@@ -27,18 +48,29 @@ function JobList() {
         ) : (
           jobs.map((job) => <JobCard job={job} key={job.id} />)
         )}
-        {isFetchingNextPage && <JobsSkeleton numCards={5} />}
+        {isFetchingNextPage && <JobsSkeleton numCards={(LIMIT / 3) * 2} />}
       </GridBox>
       <div className="flex flex-col items-center justify-center gap-6 p-14 pb-0">
-        {hasNextPage && !isFetchingNextPage && (
-          <Button
-            onClick={fetchNextPage}
-            className="px-8 py-3"
-            disabled={isFetching}
-          >
-            Load more
-          </Button>
+        {isFetchNextPageError && (
+          <Error refetch={fetchNextPage} retry>
+            Please retry at a later time.
+          </Error>
         )}
+        {isPaused && (
+          <Error>You're offline. Loading will resume when you reconnect.</Error>
+        )}
+        {!isPaused &&
+          !isFetchNextPageError &&
+          hasNextPage &&
+          !isFetchingNextPage && (
+            <Button
+              onClick={fetchNextPage}
+              className="px-8 py-3"
+              disabled={isFetching} // TO ACCOUNT FOR BG FETCHES TOO
+            >
+              Load more
+            </Button>
+          )}
       </div>
     </>
   );

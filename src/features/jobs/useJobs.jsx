@@ -7,10 +7,17 @@ export function useJobs() {
     data,
     error,
     isPending,
+    isPaused,
     fetchNextPage,
     hasNextPage,
     isFetching,
     isFetchingNextPage,
+    status,
+    failureReason,
+    fetchStatus,
+    refetch,
+    isFetchNextPageError,
+    isLoadingError,
   } = useInfiniteQuery({
     queryKey: ["jobs"],
     queryFn: async ({ pageParam }) => {
@@ -26,9 +33,14 @@ export function useJobs() {
 
       return lastPage.nextCursor;
     },
+    retry: 1,
   });
 
   const jobs = data?.pages.flatMap((page) => page.data) ?? []; // all jobs are given, but no re-render of the already existing jobs due to their key prop.
+
+  console.log("INFORMATION---------");
+  console.log(status);
+  console.log(fetchStatus);
 
   return {
     jobs,
@@ -38,5 +50,10 @@ export function useJobs() {
     hasNextPage,
     isFetching,
     isFetchingNextPage,
+    failureReason,
+    isPaused,
+    refetch,
+    isLoadingError,
+    isFetchNextPageError,
   };
 }
