@@ -21,6 +21,7 @@ function Button({
       "bg-indigo-500 text-neutral-0 hover:bg-indigo-300": variant === "primary",
       "bg-indigo-500/20 text-preset-4-bold text-indigo-500 hover:bg-indigo-500/10":
         variant === "secondary",
+      "text-slate-900 hover:text-slate-500 ": variant === "outline",
     },
   ];
 

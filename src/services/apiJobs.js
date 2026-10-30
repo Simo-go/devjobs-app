@@ -79,10 +79,12 @@ export async function getJobs({
     requirements,
     role,
     location,
+    applyUrl:apply_url,
     ...companies!inner(
       companyName:name,
       logoUrl:logo_url,
-      logoBgColor:logo_bg_color
+      logoBgColor:logo_bg_color,
+      websiteUrl:website_url
     )
     `,
     )

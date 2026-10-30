@@ -46,6 +46,7 @@ function JobCard({ job }) {
   return (
     <Link
       to={`/job/${job.companyName}/${job.id}`}
+      state={{ comesFromJobList: true }}
       className="row-span-3 grid grid-rows-subgrid"
     >
       <Card
