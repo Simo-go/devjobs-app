@@ -21,7 +21,7 @@ function JobHeader({ job }) {
       <Button
         variant="outline"
         onClick={() => {
-          if (comesFromJobList) navigate(-1);
+          if (comesFromJobList) return navigate(-1);
           navigate("/");
         }}
         className="mb-8 inline-flex w-auto items-center gap-2 md:mb-4"

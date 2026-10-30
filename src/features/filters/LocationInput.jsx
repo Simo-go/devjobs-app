@@ -11,7 +11,7 @@ function LocationInput({ className }) {
       >
         <IconLocation />
       </Form.Label>
-      <Form.Input name="location" placeholder="Filter by location" />
+      <Form.Input name="loc" placeholder="Filter by location" />
     </Form.InputContainer>
   );
 }

@@ -5,13 +5,25 @@ import clsx from "clsx";
 import { createContext, use, useContext, useState } from "react";
 import Button from "./Button";
 import Checkbox from "./Checkbox";
+import { useSearchParams } from "react-router";
 
 const FormContext = createContext();
 
 // Note: the idea here is to keep the form state shared and to all elements to be very customizable, (also in terms of css w/ tailwind!)
 function Form({ className, children, id, handleSubmit }) {
+  const [searchParams, _] = useSearchParams();
+
+  console.log();
+
   const formName = id;
-  const [formState, setFormState] = useState({});
+  const [formState, setFormState] = useState(() => {
+    if (searchParams.size)
+      return Object.fromEntries(
+        [...searchParams.keys()].map((key) => [key, searchParams.get(key)]),
+      );
+
+    return {};
+  });
 
   function updateField(name, value) {
     setFormState((state) => ({ ...state, [name]: value }));
@@ -33,6 +45,8 @@ function Form({ className, children, id, handleSubmit }) {
 
 Form.Input = function ({ name, className, ...props }) {
   const { formState, updateField } = useContext(FormContext);
+  console.log(name);
+  console.log(formState);
 
   return (
     <input

@@ -1,4 +1,4 @@
-import { useSearchParams } from "react-router";
+import { useLocation, useSearchParams } from "react-router";
 import IconFilter from "../../assets/icons/icon-filter.svg?react";
 import IconSearch from "../../assets/icons/icon-search.svg?react";
 import Dialog from "../../ui/Dialog";
@@ -9,16 +9,17 @@ import LocationInput from "./LocationInput";
 
 function Search() {
   const [searchParams, setSearchParams] = useSearchParams();
+  const location = useLocation();
 
   function handleSearch(formState) {
     console.log(formState);
 
-    if (formState?.query) searchParams.set("q", formState.query);
+    if (formState?.q) searchParams.set("q", formState.q);
     else searchParams.delete("q");
-    if (formState?.location) searchParams.set("loc", formState.location);
+    if (formState?.loc) searchParams.set("loc", formState.location);
     else searchParams.delete("loc");
-    if (formState?.["is-full-time"])
-      searchParams.set("full-time", formState?.["is-full-time"]);
+    if (formState?.["full-time"])
+      searchParams.set("full-time", formState?.["full-time"]);
     else searchParams.delete("full-time");
 
     setSearchParams(searchParams);
