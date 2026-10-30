@@ -5,13 +5,13 @@ function JobDetailsInput() {
   return (
     <Form.InputContainer className="col-span-2 mr-4 flex grow items-center gap-0 rounded-l-md md:col-span-1 md:mr-0 md:gap-4 md:border-r">
       <Form.Label
-        htmlFor="title"
+        htmlFor="query"
         className="text-indigo-500 transition-colors duration-300 [&:has(+input:focus)]:text-indigo-300"
       >
         <IconSearch className="hidden md:block" />
       </Form.Label>
       <Form.Input
-        name="title"
+        name="query"
         placeholder="Filter by title, companies, expertise, ..."
       />
     </Form.InputContainer>

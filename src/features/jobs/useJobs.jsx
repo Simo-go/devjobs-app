@@ -35,8 +35,6 @@ export function useJobs() {
 
   const jobs = data?.pages.flatMap((page) => page.data) ?? []; // all jobs are given, but no re-render of the already existing jobs due to their key prop.
 
-  console.log(jobs);
-
   return {
     jobs,
     error,

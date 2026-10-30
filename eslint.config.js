@@ -23,6 +23,7 @@ export default defineConfig([
     rules: {
       "no-unused-vars": "warn",
       "tailwindcss/no-custom-classname": "off",
+      // "react-refresh/only-export-components": "off",
     },
     settings: {
       tailwindcss: {

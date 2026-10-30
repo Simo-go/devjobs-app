@@ -1,14 +1,27 @@
-import IconSearch from "../../assets/icons/icon-search.svg?react";
+import { useSearchParams } from "react-router";
 import IconFilter from "../../assets/icons/icon-filter.svg?react";
+import IconSearch from "../../assets/icons/icon-search.svg?react";
 import Dialog from "../../ui/Dialog";
 import Form from "../../ui/Form";
+import FullTimeCheckbox from "./FullTimeCheckbox";
 import JobDetailsInput from "./JobDetailsInput";
 import LocationInput from "./LocationInput";
-import FullTimeCheckbox from "./FullTimeCheckbox";
 
 function Search() {
+  const [searchParams, setSearchParams] = useSearchParams();
+
   function handleSearch(formState) {
     console.log(formState);
+
+    if (formState?.query) searchParams.set("q", formState.query);
+    else searchParams.delete("q");
+    if (formState?.location) searchParams.set("loc", formState.location);
+    else searchParams.delete("loc");
+    if (formState?.["is-full-time"])
+      searchParams.set("full-time", formState?.["is-full-time"]);
+    else searchParams.delete("full-time");
+
+    setSearchParams(searchParams);
   }
 
   return (

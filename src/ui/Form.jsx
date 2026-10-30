@@ -2,7 +2,7 @@
 /* eslint-disable @eslint-react/rules-of-hooks */
 /* eslint-disable react-hooks/rules-of-hooks */
 import clsx from "clsx";
-import { createContext, useContext, useState } from "react";
+import { createContext, use, useContext, useState } from "react";
 import Button from "./Button";
 import Checkbox from "./Checkbox";
 
@@ -98,5 +98,14 @@ Form.InputContainer = function ({ className, children }) {
 Form.Container = function ({ className, children }) {
   return <div className={clsx(className, "p-4 md:px-6")}>{children}</div>;
 };
+
+// eslint-disable-next-line react-refresh/only-export-components
+export function useFormContext() {
+  const context = use(FormContext);
+
+  if (!context) throw new Error("Form context used outside of FormProvider");
+
+  return context;
+}
 
 export default Form;
