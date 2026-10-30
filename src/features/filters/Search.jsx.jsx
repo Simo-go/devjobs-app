@@ -6,24 +6,10 @@ import Form from "../../ui/Form";
 import FullTimeCheckbox from "./FullTimeCheckbox";
 import JobDetailsInput from "./JobDetailsInput";
 import LocationInput from "./LocationInput";
+import { useSearch } from "./useSearch";
 
 function Search() {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const location = useLocation();
-
-  function handleSearch(formState) {
-    console.log(formState);
-
-    if (formState?.q) searchParams.set("q", formState.q);
-    else searchParams.delete("q");
-    if (formState?.loc) searchParams.set("loc", formState.location);
-    else searchParams.delete("loc");
-    if (formState?.["full-time"])
-      searchParams.set("full-time", formState?.["full-time"]);
-    else searchParams.delete("full-time");
-
-    setSearchParams(searchParams);
-  }
+  const handleSearch = useSearch();
 
   return (
     <Dialog>
