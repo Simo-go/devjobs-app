@@ -2,7 +2,6 @@ import CompanyLogo from "./CompanyLogo";
 
 function JobCardHeader({ job }) {
   const { position, logoUrl, companyName, logoBgColor } = job;
-  console.log(logoUrl);
 
   return (
     <header className="mb-3">
