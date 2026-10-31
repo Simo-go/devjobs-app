@@ -4,7 +4,15 @@ export function useClickOutside(capture = true, ref, handler) {
   useEffect(
     function () {
       function handleClose(e) {
-        if (!ref.current || ref.current.contains(e.target)) return;
+        if (
+          !ref.current ||
+          ref.current.contains(e.target) ||
+          e.target.closest("button[type='submit']")
+        )
+          return;
+        console.log(e.target);
+
+        console.log("closing on hit enter");
 
         handler();
       }

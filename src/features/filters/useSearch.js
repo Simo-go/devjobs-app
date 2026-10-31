@@ -1,11 +1,11 @@
 import { useSearchParams } from "react-router";
+import { useDialogContext } from "../../ui/Dialog";
 
-export function useSearch() {
+export function useSearch(formRef) {
   const [searchParams, setSearchParams] = useSearchParams();
+  const { handleCloseDialog } = useDialogContext();
 
   function handleSearch(formState) {
-    console.log(formState);
-
     if (formState?.q && formState?.q.length > 2)
       searchParams.set("q", formState.q);
     else searchParams.delete("q");
@@ -17,6 +17,11 @@ export function useSearch() {
     else searchParams.delete("full-time");
 
     setSearchParams(searchParams);
+
+    handleCloseDialog();
+
+    // remove focus from currently focused input element
+    formRef.current.querySelector(":focus")?.blur();
   }
 
   return handleSearch;

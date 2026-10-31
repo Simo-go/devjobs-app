@@ -40,8 +40,6 @@ export async function insertJob(job) {
 
   filteredJob["company_id"] = id;
 
-  console.log(filteredJob.id);
-
   const { data: updateData, error: updateError } = await supabase
     .from("jobs")
     .insert(filteredJob);
@@ -74,8 +72,6 @@ export async function getJobs({
   const normalizedData = data.map((item) => normalizeObjectKeys(item));
 
   if (normalizedData.length !== LIMIT) return { data: normalizedData };
-
-  console.log(normalizedData);
 
   const { id: nextCursorId, createdAt: nextCursorDate } = normalizedData.at(-1);
   const nextCursorRank = normalizedData.at(-1)?.rank ?? null;

@@ -11,7 +11,7 @@ import { mapSearchParamsToObj } from "../utils/helpers";
 const FormContext = createContext();
 
 // Note: the idea here is to keep the form state shared and to all elements to be very customizable, (also in terms of css w/ tailwind!)
-function Form({ className, children, id, handleSubmit }) {
+function Form({ className, children, id, handleSubmit, ref }) {
   const [searchParams, _] = useSearchParams();
 
   console.log();
@@ -19,7 +19,6 @@ function Form({ className, children, id, handleSubmit }) {
   const formName = id;
   const [formState, setFormState] = useState(() => {
     if (searchParams.size) return mapSearchParamsToObj(searchParams);
-
     return {};
   });
 
@@ -34,7 +33,7 @@ function Form({ className, children, id, handleSubmit }) {
 
   return (
     <FormContext value={{ formName, formState, updateField, onSubmit }}>
-      <form id={formName} className={className} onSubmit={onSubmit}>
+      <form id={formName} className={className} onSubmit={onSubmit} ref={ref}>
         {children}
       </form>
     </FormContext>
@@ -42,7 +41,7 @@ function Form({ className, children, id, handleSubmit }) {
 }
 
 Form.Input = function ({ name, className, ...props }) {
-  const { formState, updateField } = useContext(FormContext);
+  const { formState, updateField, formName } = useContext(FormContext);
 
   return (
     <input
@@ -54,6 +53,7 @@ Form.Input = function ({ name, className, ...props }) {
       )}
       value={formState[name] ?? ""}
       onChange={(e) => updateField(name, e.target.value)}
+      form={formName}
     />
   );
 };
@@ -61,6 +61,7 @@ Form.Input = function ({ name, className, ...props }) {
 Form.Checkbox = function ({ name, ...props }) {
   const { formState, updateField } = useContext(FormContext);
   const isChecked = Boolean(formState[name]);
+  const { formName } = useContext(FormContext);
 
   return (
     <Checkbox
@@ -69,6 +70,7 @@ Form.Checkbox = function ({ name, ...props }) {
       type="checkbox"
       checked={isChecked}
       onChange={(e) => updateField(name, e.target.checked)}
+      form={formName}
     />
   );
 };

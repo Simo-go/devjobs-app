@@ -21,13 +21,15 @@ function Dialog({ children }) {
   const [isOpen, setIsOpen] = useState(false);
 
   function handleToggleDialog() {
-    console.log("test");
-
     setIsOpen((isOpen) => !isOpen);
   }
 
+  function handleCloseDialog() {
+    setIsOpen(false);
+  }
+
   return (
-    <DialogContext value={{ isOpen, handleToggleDialog }}>
+    <DialogContext value={{ isOpen, handleToggleDialog, handleCloseDialog }}>
       {children}
     </DialogContext>
   );
@@ -80,5 +82,15 @@ Dialog.Window = function ({ children }) {
     document.body,
   );
 };
+
+// eslint-disable-next-line react-refresh/only-export-components
+export function useDialogContext() {
+  const context = useContext(DialogContext);
+
+  if (!context)
+    throw new Error("Dialog context used outside of ContextProvider");
+
+  return context;
+}
 
 export default Dialog;
