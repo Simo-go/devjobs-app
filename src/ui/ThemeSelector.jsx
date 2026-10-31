@@ -1,5 +1,5 @@
-import SunLogo from "../assets/icons/icon-sun.svg?react";
 import IconLogo from "../assets/icons/icon-moon.svg?react";
+import SunLogo from "../assets/icons/icon-sun.svg?react";
 
 function Selector() {
   return (

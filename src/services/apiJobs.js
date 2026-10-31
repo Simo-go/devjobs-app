@@ -10,40 +10,43 @@ export async function addBulkNoForeignKey(table, dataArr) {
   return data;
 }
 
+export async function insertBulkJobs(jobs) {
+  for (const job of jobs) {
+    try {
+      await insertJob(job);
+    } catch (err) {
+      console.error(`Could not insert job with id ${job.id}. ${err.message}`);
+    }
+  }
+}
+
 export async function insertJob(job) {
   const { data, error } = await supabase
     .from("companies")
     .select("id, name")
     .eq("name", job.company.name);
 
-  const id = data[0].id;
-  console.log(data);
-
-  console.log(id, error);
+  const id = data[0]?.id;
+  if (!id) console.error(`FOLLOWING COMPANY NOT FOUND: ${job.company.name}`);
 
   const filteredJob = Object.fromEntries(
     Object.entries(job).filter(([key, _]) => {
-      console.log(key);
-
       return (
-        key !== "created_at" &&
-        key != "modified_at" &&
-        key !== "id" &&
-        key !== "company"
+        // key !== "created_at" &&
+        key != "modified_at" && key !== "id" && key !== "company"
       );
     }),
   );
 
   filteredJob["company_id"] = id;
 
+  console.log(filteredJob.id);
+
   const { data: updateData, error: updateError } = await supabase
     .from("jobs")
-    .insert(filteredJob)
-    .select();
-  console.log(updateError);
+    .insert(filteredJob);
 
   if (updateError) throw new Error(updateError.message);
-  console.log(updateData);
 }
 
 export async function populateJobs(jobs) {
@@ -51,58 +54,24 @@ export async function populateJobs(jobs) {
 }
 
 export async function getJobs({
-  currentCursor = new Date().toISOString(),
-  currentCursorId,
+  currentCursor = null,
+  currentCursorId = null,
 }) {
-  let idLatestJob, idError;
-  if (!currentCursorId) {
-    const { data, error } = await supabase
-      .from("jobs")
-      .select("id")
-      .order("created_at", { ascending: false })
-      .limit(1);
-    idLatestJob = data[0].id;
-    idError = error;
-  }
+  const { data, error } = await supabase.rpc("get_filtered_jobs_by_cursor", {
+    p_cursor_date: currentCursor ?? null,
+    p_cursor_id: currentCursorId ?? null,
+    p_limit: LIMIT,
+  });
 
-  if (idError) throw new Error(idError.message);
+  if (error) throw new Error(error.message);
 
-  // let query = supabase
-  //   .from("jobs")
-  //   .select(
-  //     `
-  //   id,
-  //   position,
-  //   createdAt:created_at,
-  //   contract,
-  //   description,
-  //   requirements,
-  //   role,
-  //   location,
-  //   applyUrl:apply_url,
-  //   ...companies!inner(
-  //     companyName:name,
-  //     logoUrl:logo_url,
-  //     logoBgColor:logo_bg_color,
-  //     websiteUrl:website_url
-  //   )
-  //   `,
-  //   )
-  //   .lt("created_at", currentCursor)
-  //   .lt("id", currentCursorId ?? idLatestJob)
-  //   .order("created_at", {
-  //     ascending: false,
-  //   })
-  //   .order("id", { ascending: false })
-  //   .limit(LIMIT);
+  const normalizedData = data.map((item) => normalizeObjectKeys(item));
 
-  // if (error) throw new Error(error.message);
+  if (normalizedData.length !== LIMIT) return { data: normalizedData };
 
-  // if (data.length !== LIMIT) return { data };
+  const { id: nextCursorId, createdAt: nextCursor } = normalizedData.at(-1);
 
-  // const { id: nextCursorId, createdAt: nextCursor } = data.at(-1);
-
-  // return { data, nextCursor: { nextCursor, nextCursorId } };
+  return { data: normalizedData, nextCursor: { nextCursor, nextCursorId } };
 }
 
 export async function getJob(id) {
@@ -119,6 +88,8 @@ export async function getJob(id) {
       )`,
     )
     .eq("id", id);
+
+  if (error) console.error(error);
 
   if (error) throw new Error(error.message);
 

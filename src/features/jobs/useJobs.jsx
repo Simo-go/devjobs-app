@@ -29,6 +29,10 @@ export function useJobs() {
         currentCursorId: pageParam.nextCursorId,
         filters,
       });
+
+      console.log("jobs:");
+      console.log(ret);
+
       return ret;
     },
     initialPageParam: { nextCursor: undefined, nextCursorId: undefined },
@@ -40,7 +44,11 @@ export function useJobs() {
     retry: 1,
   });
 
+  console.log(data);
+
   const jobs = data?.pages.flatMap((page) => page.data) ?? []; // all jobs are given, but no re-render of the already existing jobs due to their key prop.
+
+  console.log(jobs);
 
   return {
     jobs,

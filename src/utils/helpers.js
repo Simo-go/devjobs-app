@@ -54,7 +54,12 @@ export function formatDurationFromNow(ISOString) {
 }
 
 export function mapSearchParamsToObj(searchParams) {
-  return Object.fromEntries(
+  const newObj = Object.fromEntries(
     [...searchParams.keys()].map((key) => [key, searchParams.get(key)]),
   );
+
+  console.log(newObj);
+
+  if (!Object.keys(newObj).length) return null;
+  return newObj;
 }

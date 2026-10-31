@@ -24,6 +24,8 @@ function JobList() {
     isLoadingError,
   } = useJobs();
 
+  console.log(jobs);
+
   const isInitialLoadingPaused = isPending && isPaused && failureReason;
 
   if (isInitialLoadingPaused)
