@@ -25,17 +25,19 @@ export function useJobs() {
     queryKey: ["jobs", filters],
     queryFn: async ({ pageParam }) => {
       const ret = await getJobs({
-        currentCursor: pageParam.nextCursor,
+        currentCursorDate: pageParam.nextCursorDate,
         currentCursorId: pageParam.nextCursorId,
+        currentCursorRank: pageParam.nextCursorRank,
         filters,
       });
 
-      console.log("jobs:");
-      console.log(ret);
-
       return ret;
     },
-    initialPageParam: { nextCursor: undefined, nextCursorId: undefined },
+    initialPageParam: {
+      nextCursorDate: undefined,
+      nextCursorId: undefined,
+      nextCursorRank: undefined,
+    },
     getNextPageParam: (lastPage) => {
       if (!lastPage.nextCursor) return undefined;
 
@@ -44,11 +46,7 @@ export function useJobs() {
     retry: 1,
   });
 
-  console.log(data);
-
   const jobs = data?.pages.flatMap((page) => page.data) ?? []; // all jobs are given, but no re-render of the already existing jobs due to their key prop.
-
-  console.log(jobs);
 
   return {
     jobs,

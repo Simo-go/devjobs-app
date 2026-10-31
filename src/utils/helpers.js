@@ -58,8 +58,6 @@ export function mapSearchParamsToObj(searchParams) {
     [...searchParams.keys()].map((key) => [key, searchParams.get(key)]),
   );
 
-  console.log(newObj);
-
   if (!Object.keys(newObj).length) return null;
   return newObj;
 }

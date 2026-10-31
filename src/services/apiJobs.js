@@ -54,12 +54,18 @@ export async function populateJobs(jobs) {
 }
 
 export async function getJobs({
-  currentCursor = null,
+  currentCursorDate = null,
   currentCursorId = null,
+  currentCursorRank = null,
+  filters = null,
 }) {
   const { data, error } = await supabase.rpc("get_filtered_jobs_by_cursor", {
-    p_cursor_date: currentCursor ?? null,
-    p_cursor_id: currentCursorId ?? null,
+    p_query: filters?.q ?? null,
+    p_location: filters?.loc ?? null,
+    p_full_time: filters?.["full-time"] ?? null,
+    p_cursor_date: currentCursorDate,
+    p_cursor_id: currentCursorId,
+    p_cursor_ranking: currentCursorRank,
     p_limit: LIMIT,
   });
 
@@ -69,9 +75,19 @@ export async function getJobs({
 
   if (normalizedData.length !== LIMIT) return { data: normalizedData };
 
-  const { id: nextCursorId, createdAt: nextCursor } = normalizedData.at(-1);
+  console.log(normalizedData);
 
-  return { data: normalizedData, nextCursor: { nextCursor, nextCursorId } };
+  const { id: nextCursorId, createdAt: nextCursorDate } = normalizedData.at(-1);
+  const nextCursorRank = normalizedData.at(-1)?.rank ?? null;
+
+  return {
+    data: normalizedData,
+    nextCursor: {
+      nextCursorDate,
+      nextCursorId,
+      nextCursorRank,
+    },
+  };
 }
 
 export async function getJob(id) {

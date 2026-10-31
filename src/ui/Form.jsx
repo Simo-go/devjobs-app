@@ -43,8 +43,6 @@ function Form({ className, children, id, handleSubmit }) {
 
 Form.Input = function ({ name, className, ...props }) {
   const { formState, updateField } = useContext(FormContext);
-  console.log(name);
-  console.log(formState);
 
   return (
     <input
