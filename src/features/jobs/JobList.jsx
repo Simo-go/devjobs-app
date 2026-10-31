@@ -7,6 +7,8 @@ import { LIMIT } from "../../utils/constants";
 import JobCard from "./JobCard";
 import JobsSkeleton from "./JobsSkeleton";
 import { useJobs } from "./useJobs";
+import NoResults from "./NoResults";
+import clsx from "clsx";
 
 function JobList() {
   const {
@@ -25,6 +27,7 @@ function JobList() {
   } = useJobs();
 
   const isInitialLoadingPaused = isPending && isPaused && failureReason;
+  const hasNoResults = jobs.length === 0;
 
   if (isInitialLoadingPaused)
     return (
@@ -43,9 +46,16 @@ function JobList() {
 
   return (
     <>
-      <GridBox className="gap-y-[ mt-14.25 grid-cols-autofill-[min(100%,18.5rem)] content-start gap-x-4 gap-y-13.25">
+      <GridBox
+        className={clsx(
+          "gap-y-[ mt-14.25 grid-cols-autofill-[min(100%,18.5rem)] gap-x-4 gap-y-13.25",
+          !hasNoResults && "content-start",
+        )}
+      >
         {isPending ? (
           <JobsSkeleton numCards={LIMIT} />
+        ) : hasNoResults ? (
+          <NoResults />
         ) : (
           jobs.map((job) => <JobCard job={job} key={job.id} />)
         )}
