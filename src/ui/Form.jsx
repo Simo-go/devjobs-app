@@ -6,6 +6,7 @@ import { createContext, use, useContext, useState } from "react";
 import Button from "./Button";
 import Checkbox from "./Checkbox";
 import { useSearchParams } from "react-router";
+import { mapSearchParamsToObj } from "../utils/helpers";
 
 const FormContext = createContext();
 
@@ -17,10 +18,7 @@ function Form({ className, children, id, handleSubmit }) {
 
   const formName = id;
   const [formState, setFormState] = useState(() => {
-    if (searchParams.size)
-      return Object.fromEntries(
-        [...searchParams.keys()].map((key) => [key, searchParams.get(key)]),
-      );
+    if (searchParams.size) return mapSearchParamsToObj(searchParams);
 
     return {};
   });

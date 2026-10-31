@@ -1,7 +1,13 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { getJobs } from "../../services/apiJobs";
+import { useSearchParams } from "react-router";
+import { mapSearchParamsToObj } from "../../utils/helpers";
 
 export function useJobs() {
+  const [searchParams, _] = useSearchParams();
+
+  const filters = mapSearchParamsToObj(searchParams);
+
   const {
     data,
     error,
@@ -16,11 +22,12 @@ export function useJobs() {
     isFetchNextPageError,
     isLoadingError,
   } = useInfiniteQuery({
-    queryKey: ["jobs"],
+    queryKey: ["jobs", filters],
     queryFn: async ({ pageParam }) => {
       const ret = await getJobs({
         currentCursor: pageParam.nextCursor,
         currentCursorId: pageParam.nextCursorId,
+        filters,
       });
       return ret;
     },

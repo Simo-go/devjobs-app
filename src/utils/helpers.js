@@ -52,3 +52,9 @@ export function formatDurationFromNow(ISOString) {
   const formattedTime = rtf.format(value, unit);
   return formattedTime;
 }
+
+export function mapSearchParamsToObj(searchParams) {
+  return Object.fromEntries(
+    [...searchParams.keys()].map((key) => [key, searchParams.get(key)]),
+  );
+}

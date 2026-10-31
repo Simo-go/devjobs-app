@@ -67,42 +67,42 @@ export async function getJobs({
 
   if (idError) throw new Error(idError.message);
 
-  const { data, error } = await supabase
-    .from("jobs")
-    .select(
-      `
-    id,
-    position,
-    createdAt:created_at,
-    contract,
-    description,
-    requirements,
-    role,
-    location,
-    applyUrl:apply_url,
-    ...companies!inner(
-      companyName:name,
-      logoUrl:logo_url,
-      logoBgColor:logo_bg_color,
-      websiteUrl:website_url
-    )
-    `,
-    )
-    .lt("created_at", currentCursor)
-    .lt("id", currentCursorId ?? idLatestJob)
-    .order("created_at", {
-      ascending: false,
-    })
-    .order("id", { ascending: false })
-    .limit(LIMIT);
+  // let query = supabase
+  //   .from("jobs")
+  //   .select(
+  //     `
+  //   id,
+  //   position,
+  //   createdAt:created_at,
+  //   contract,
+  //   description,
+  //   requirements,
+  //   role,
+  //   location,
+  //   applyUrl:apply_url,
+  //   ...companies!inner(
+  //     companyName:name,
+  //     logoUrl:logo_url,
+  //     logoBgColor:logo_bg_color,
+  //     websiteUrl:website_url
+  //   )
+  //   `,
+  //   )
+  //   .lt("created_at", currentCursor)
+  //   .lt("id", currentCursorId ?? idLatestJob)
+  //   .order("created_at", {
+  //     ascending: false,
+  //   })
+  //   .order("id", { ascending: false })
+  //   .limit(LIMIT);
 
-  if (error) throw new Error(error.message);
+  // if (error) throw new Error(error.message);
 
-  if (data.length !== LIMIT) return { data };
+  // if (data.length !== LIMIT) return { data };
 
-  const { id: nextCursorId, createdAt: nextCursor } = data.at(-1);
+  // const { id: nextCursorId, createdAt: nextCursor } = data.at(-1);
 
-  return { data, nextCursor: { nextCursor, nextCursorId } };
+  // return { data, nextCursor: { nextCursor, nextCursorId } };
 }
 
 export async function getJob(id) {
