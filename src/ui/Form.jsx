@@ -14,8 +14,6 @@ const FormContext = createContext();
 function Form({ className, children, id, handleSubmit, ref }) {
   const [searchParams, _] = useSearchParams();
 
-  console.log();
-
   const formName = id;
   const [formState, setFormState] = useState(() => {
     if (searchParams.size) return mapSearchParamsToObj(searchParams);
@@ -40,7 +38,7 @@ function Form({ className, children, id, handleSubmit, ref }) {
   );
 }
 
-Form.Input = function ({ name, className, ...props }) {
+Form.Input = function ({ name, className, onChange, ...props }) {
   const { formState, updateField, formName } = useContext(FormContext);
 
   return (
@@ -52,13 +50,16 @@ Form.Input = function ({ name, className, ...props }) {
         "w-full truncate text-preset-4-regular text-slate-950 outline-0 placeholder-shown:text-ellipsis autofill:shadow-[inset_0_0_0_1000px_white]",
       )}
       value={formState[name] ?? ""}
-      onChange={(e) => updateField(name, e.target.value)}
+      onChange={(e) => {
+        updateField(name, e.target.value);
+        onChange?.(e);
+      }}
       form={formName}
     />
   );
 };
 
-Form.Checkbox = function ({ name, ...props }) {
+Form.Checkbox = function ({ name, onChange, ...props }) {
   const { formState, updateField } = useContext(FormContext);
   const isChecked = Boolean(formState[name]);
   const { formName } = useContext(FormContext);
@@ -69,7 +70,10 @@ Form.Checkbox = function ({ name, ...props }) {
       {...props}
       type="checkbox"
       checked={isChecked}
-      onChange={(e) => updateField(name, e.target.checked)}
+      onChange={(e) => {
+        updateField(name, e.target.checked); // own controlled state update
+        onChange?.(e); // react hook form update
+      }}
       form={formName}
     />
   );
