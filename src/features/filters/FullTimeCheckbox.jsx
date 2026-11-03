@@ -3,12 +3,13 @@ import Form from "../../ui/Form";
 import { useId } from "react";
 
 function FullTimeCheckbox({ className }) {
-  const id = useId();
-
   return (
     <Form.Container className={clsx("items-center gap-4 md:p-0!", className)}>
-      <Form.Checkbox id={id} name="full-time" className="shrink-0" />
-      <Form.Label className="cursor-pointer text-preset-4-bold" htmlFor={id}>
+      <Form.Checkbox id="full-time" className="shrink-0" />
+      <Form.Label
+        className="cursor-pointer text-preset-4-bold"
+        htmlFor="full-time"
+      >
         Full-Time Only
       </Form.Label>
     </Form.Container>

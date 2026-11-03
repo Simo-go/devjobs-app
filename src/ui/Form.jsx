@@ -38,20 +38,21 @@ function Form({ className, children, id, handleSubmit, ref }) {
   );
 }
 
-Form.Input = function ({ name, className, onChange, ...props }) {
+Form.Input = function ({ id, className, onChange, ...props }) {
   const { formState, updateField, formName } = useContext(FormContext);
+  console.log(props, onChange, id);
 
   return (
     <input
-      id={name}
+      id={id}
       {...props}
       className={clsx(
         className,
         "w-full truncate text-preset-4-regular text-slate-900 outline-0 placeholder:text-slate-900/50 placeholder-shown:text-ellipsis autofill:shadow-[inset_0_0_0_1000px_white]",
       )}
-      value={formState[name] ?? ""}
+      value={formState[id] ?? ""}
       onChange={(e) => {
-        updateField(name, e.target.value);
+        updateField(id, e.target.value);
         onChange?.(e);
       }}
       form={formName}
@@ -59,19 +60,19 @@ Form.Input = function ({ name, className, onChange, ...props }) {
   );
 };
 
-Form.Checkbox = function ({ name, onChange, ...props }) {
+Form.Checkbox = function ({ id, onChange, ...props }) {
   const { formState, updateField } = useContext(FormContext);
-  const isChecked = Boolean(formState[name]);
+  const isChecked = Boolean(formState[id]);
   const { formName } = useContext(FormContext);
 
   return (
     <Checkbox
-      id={name}
+      id={id}
       {...props}
       type="checkbox"
       checked={isChecked}
       onChange={(e) => {
-        updateField(name, e.target.checked); // own controlled state update
+        updateField(id, e.target.checked); // own controlled state update
         onChange?.(e); // react hook form update
       }}
       form={formName}

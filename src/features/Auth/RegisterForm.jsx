@@ -7,10 +7,11 @@ import Button from "../../ui/Button";
 import Form from "../../ui/Form";
 import Socials from "./Socials";
 import { Link } from "react-router";
+import { signUpUser } from "../../services/apiAuth";
 
 function RegisterForm() {
   return (
-    <AuthForm>
+    <AuthForm onSubmit={signUpUser}>
       <AuthFormHeader
         title="Register now"
         caption="Start applying for that new job! For free."

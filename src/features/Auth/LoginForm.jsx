@@ -11,10 +11,21 @@ import AuthForm from "./AuthForm";
 import AuthFormHeader from "./AuthFormHeader";
 import AuthInput from "./AuthInput";
 import Socials from "./Socials";
+import { signInWithEmail } from "../../services/apiAuth";
+import { useForm } from "react-hook-form";
 
 function LoginForm() {
+  const { register, handleSubmit, formState } = useForm();
+
+  function onSubmit(data) {
+    console.log(data);
+    console.log(formState);
+
+    // signInWithEmail();
+  }
+
   return (
-    <AuthForm>
+    <AuthForm onSubmit={handleSubmit(onSubmit)}>
       <AuthFormHeader
         Icon={<HiArrowRightOnRectangle size={24} className="text-slate-900" />}
         title="Sign in with email"
@@ -28,6 +39,7 @@ function LoginForm() {
           id="email"
           autoComplete="email"
           placeholder="Email"
+          {...register("email")}
         />
         <AuthInput
           Icon={HiLockClosed}
@@ -36,6 +48,7 @@ function LoginForm() {
           autoComplete="current-password"
           placeholder="Password"
           className="mb-2"
+          {...register("password")}
         />
         <Link className="font-sm block text-right text-preset-5 text-xs font-normal text-slate-900/75 hover:text-slate-900">
           Forgot Password?

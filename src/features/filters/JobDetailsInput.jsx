@@ -11,7 +11,7 @@ function JobDetailsInput() {
         <IconSearch className="hidden md:block" />
       </Form.Label>
       <Form.Input
-        name="q"
+        id="q"
         placeholder="Filter by title, companies, expertise, ..."
       />
     </Form.InputContainer>
