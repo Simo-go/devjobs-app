@@ -12,11 +12,15 @@ export async function signUpUser() {
   console.log(data, error);
 }
 
-export async function signInWithEmail() {
+export async function signInWithEmail({ email, password }) {
   const { data, error } = await supabase.auth.signInWithPassword({
-    email: "ndsaasproject@gmail.com",
-    password: "@Testin",
+    email: email,
+    password: password,
   });
 
-  console.log(error);
+  if (error) throw error;
+
+  console.log(data);
+
+  return data;
 }

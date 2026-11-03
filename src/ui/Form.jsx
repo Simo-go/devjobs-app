@@ -98,9 +98,9 @@ Form.Label = function ({ htmlFor, className, children, ...props }) {
   );
 };
 
-Form.Error = function ({ children }) {
+Form.Error = function ({ children, className }) {
   return (
-    <span className="mb-1 block text-right text-preset-5 font-normal text-red-500">
+    <span className={clsx(className, "text-preset-5 font-normal text-red-500")}>
       {children}
     </span>
   );

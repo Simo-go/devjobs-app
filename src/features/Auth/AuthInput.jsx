@@ -2,11 +2,11 @@ import clsx from "clsx";
 import Form from "../../ui/Form";
 
 function AuthInput({ id, Icon, className, errorMsg, ...props }) {
-  console.log(errorMsg);
-
   return (
     <div>
-      {errorMsg && <Form.Error>{errorMsg}</Form.Error>}
+      {errorMsg && (
+        <Form.Error className="mb-1 block text-right">{errorMsg}</Form.Error>
+      )}
       <Form.InputContainer
         className={clsx(
           className,

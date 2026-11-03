@@ -12,24 +12,15 @@ import AuthForm from "./AuthForm";
 import AuthFormHeader from "./AuthFormHeader";
 import AuthInput from "./AuthInput";
 import Socials from "./Socials";
+import { signInWithEmail } from "../../services/apiAuth";
+import { useState } from "react";
+import { useLoginForm } from "./useLoginForm";
 
 function LoginForm() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
-  console.log(errors);
-
-  function onSubmit(data) {
-    console.log(data);
-
-    // signInWithEmail();
-  }
+  const { register, handleSubmit, errors } = useLoginForm();
 
   return (
-    <AuthForm onSubmit={handleSubmit(onSubmit)}>
+    <AuthForm onSubmit={handleSubmit}>
       <AuthFormHeader
         Icon={<HiArrowRightOnRectangle size={24} className="text-slate-900" />}
         title="Sign in with email"
@@ -79,20 +70,27 @@ function LoginForm() {
           Forgot Password?
         </Link>
       </AuthDetails>
-      <div className="mb-8 flex gap-3 justify-self-end">
-        <Button
-          type="button"
-          size="normal"
-          variant="outline"
-          className="text-preset-5!"
-          link
-          to="/register"
-        >
-          Sign up
-        </Button>
-        <Form.Submit size="large" className="text-preset-5!">
-          Log In
-        </Form.Submit>
+      <div className="mb-8">
+        {errors.root?.server && (
+          <Form.Error className="mb-2 block text-right">
+            {errors.root?.server.message}
+          </Form.Error>
+        )}
+        <div className="flex gap-3 justify-self-end">
+          <Button
+            type="button"
+            size="normal"
+            variant="outline"
+            className="text-preset-5!"
+            link
+            to="/register"
+          >
+            Sign up
+          </Button>
+          <Form.Submit size="large" className="text-preset-5!">
+            Log In
+          </Form.Submit>
+        </div>
       </div>
       <Socials />
     </AuthForm>
