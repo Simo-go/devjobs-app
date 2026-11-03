@@ -40,7 +40,6 @@ function Form({ className, children, id, handleSubmit, ref }) {
 
 Form.Input = function ({ id, className, onChange, ...props }) {
   const { formState, updateField, formName } = useContext(FormContext);
-  console.log(props, onChange, id);
 
   return (
     <input
@@ -96,6 +95,14 @@ Form.Label = function ({ htmlFor, className, children, ...props }) {
     <label {...props} htmlFor={htmlFor} className={clsx(className)}>
       {children}
     </label>
+  );
+};
+
+Form.Error = function ({ children }) {
+  return (
+    <span className="mb-1 block text-right text-preset-5 font-normal text-red-500">
+      {children}
+    </span>
   );
 };
 
