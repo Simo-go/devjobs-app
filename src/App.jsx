@@ -1,18 +1,19 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Jobs from "./pages/Jobs";
-import Job from "./pages/Job";
-import Bookmarks from "./pages/Bookmarks";
-import Applications from "./pages/Applications";
-import Dashboard from "./pages/Dashboard";
-import AppLayout from "./ui/AppLayout";
-import JobLayout from "./ui/JobLayout";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import Confirmation from "./pages/Confirmation";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router";
 import AuthLayout from "./features/Auth/AuthLayout";
-import ProtectedRoute from "./ui/ProtectedRoute";
+import Applications from "./pages/Applications";
+import Bookmarks from "./pages/Bookmarks";
+import Confirmation from "./pages/Confirmation";
+import Dashboard from "./pages/Dashboard";
+import Job from "./pages/Job";
+import Jobs from "./pages/Jobs";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import AppLayout from "./ui/AppLayout";
+import AuthenticatedRoute from "./ui/AuthenticatedRoute";
+import JobLayout from "./ui/JobLayout";
+import GuestRoute from "./ui/GuestRoute";
 
 const queryClient = new QueryClient();
 
@@ -23,7 +24,13 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route index element={<Navigate to="/home" replace />} />
-          <Route element={<AuthLayout />}>
+          <Route
+            element={
+              <GuestRoute>
+                <AuthLayout />
+              </GuestRoute>
+            }
+          >
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/confirm-account" element={<Confirmation />} />
@@ -34,7 +41,7 @@ function App() {
           <Route element={<AppLayout />}>
             {/* <Route index element={<Navigate to="/home" replace />} /> */}
             <Route path="job/:company/:id" element={<Job />} />
-            <Route element={<ProtectedRoute />}>
+            <Route element={<AuthenticatedRoute />}>
               <Route path="/bookmarks" element={<Bookmarks />} />
               <Route path="/applications" element={<Applications />} />
               <Route path="/dashboard" element={<Dashboard />} />

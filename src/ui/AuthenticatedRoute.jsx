@@ -2,7 +2,7 @@ import { Navigate, Outlet } from "react-router";
 import useUser from "../features/Auth/useUser";
 import LoadingSpinner from "./LoadingSpinner";
 
-function ProtectedRoute() {
+function AuthenticatedRoute() {
   const { user, isAuthenticating, authError } = useUser();
   console.log(user, isAuthenticating, authError);
 
@@ -17,4 +17,4 @@ function ProtectedRoute() {
   return <Outlet />;
 }
 
-export default ProtectedRoute;
+export default AuthenticatedRoute;
