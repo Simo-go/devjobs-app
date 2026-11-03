@@ -10,12 +10,14 @@ function AuthInput({ id, Icon, className, errorMsg, ...props }) {
       <Form.InputContainer
         className={clsx(
           className,
-          "flex items-center gap-2 rounded-md bg-slate-100 py-3!",
+          "flex items-center gap-2 rounded-md bg-slate-100 py-3",
         )}
       >
-        <Form.Label htmlFor={id}>
-          <Icon className="text-slate-900" />
-        </Form.Label>
+        {Icon && (
+          <Form.Label htmlFor={id}>
+            <Icon className="text-slate-900" />
+          </Form.Label>
+        )}
         <Form.Input id={id} {...props} />
       </Form.InputContainer>
     </div>

@@ -1,4 +1,3 @@
-import { useForm } from "react-hook-form";
 import {
   HiArrowRightOnRectangle,
   HiEnvelope,
@@ -12,9 +11,8 @@ import AuthForm from "./AuthForm";
 import AuthFormHeader from "./AuthFormHeader";
 import AuthInput from "./AuthInput";
 import Socials from "./Socials";
-import { signInWithEmail } from "../../services/apiAuth";
-import { useState } from "react";
 import { useLoginForm } from "./useLoginForm";
+import { validations } from "../../utils/constants";
 
 function LoginForm() {
   const { register, handleSubmit, errors } = useLoginForm();
@@ -34,13 +32,7 @@ function LoginForm() {
           id="email"
           autoComplete="email"
           placeholder="Email"
-          {...register("email", {
-            required: { value: true, message: "Provide an email" },
-            pattern: {
-              value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,6}$/g,
-              message: "Incorrect email format",
-            },
-          })}
+          {...register("email", validations.email)}
           errorMsg={errors.email?.message}
         />
         <AuthInput
@@ -50,20 +42,7 @@ function LoginForm() {
           autoComplete="current-password"
           placeholder="Password"
           className="mb-2"
-          {...register("password", {
-            required: {
-              value: true,
-              message: "Provide a password",
-            },
-            minLength: {
-              value: 8,
-              message: "Passowrd must be at least 8 characters",
-            },
-            pattern: {
-              value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).*$/gm,
-              message: "Incorrect password format",
-            },
-          })}
+          {...register("password", validations.password)}
           errorMsg={errors.password?.message}
         />
         <Link className="font-sm block text-right text-preset-5 text-xs font-normal text-slate-900/75 hover:text-slate-900">

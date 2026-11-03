@@ -47,7 +47,7 @@ Form.Input = function ({ id, className, onChange, ...props }) {
       {...props}
       className={clsx(
         className,
-        "w-full truncate text-preset-4-regular text-slate-900 outline-0 placeholder:text-slate-900/50 placeholder-shown:text-ellipsis autofill:shadow-[inset_0_0_0_1000px_white]",
+        "w-full truncate text-preset-4-regular text-slate-900 outline-0 placeholder:text-slate-900/50 placeholder-shown:text-ellipsis autofill:shadow-[inset_0_0_0_1000px_var(--color-slate-100)] autofill:[-webkit-text-fill-color:var(--color-slate-900)] disabled:cursor-not-allowed",
       )}
       value={formState[id] ?? ""}
       onChange={(e) => {
@@ -92,7 +92,14 @@ Form.Submit = function ({ children, ...props }) {
 // Form.Button = function () {};
 Form.Label = function ({ htmlFor, className, children, ...props }) {
   return (
-    <label {...props} htmlFor={htmlFor} className={clsx(className)}>
+    <label
+      {...props}
+      htmlFor={htmlFor}
+      className={clsx(
+        className,
+        "in-[.group:has(:disabled)]:cursor-not-allowed",
+      )}
+    >
       {children}
     </label>
   );
@@ -110,7 +117,7 @@ Form.InputContainer = function ({ className, children }) {
   return (
     <Form.Container
       className={clsx(
-        "border-r-slate-900/20 transition-shadow has-focus-visible:ring-2 has-focus-visible:ring-indigo-300 has-focus-visible:ring-inset",
+        "group border-r-slate-900/20 transition-shadow has-focus-visible:ring-2 has-focus-visible:ring-indigo-300 has-focus-visible:ring-inset has-disabled:cursor-not-allowed has-disabled:opacity-50",
         className,
       )}
     >
