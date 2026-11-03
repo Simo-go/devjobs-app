@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
-import { signInWithEmail } from "../../services/apiAuth";
-import { useNavigate } from "react-router";
+import { replace, useNavigate } from "react-router";
+import useLogin from "./useLogin";
 
 export function useLoginForm() {
   const {
@@ -10,31 +10,30 @@ export function useLoginForm() {
     clearErrors,
     formState: { errors },
   } = useForm();
+  const { isLoggingIn, login } = useLogin();
 
   const navigate = useNavigate();
 
   async function onSubmit(data) {
     clearErrors("root.server");
-    console.log(data);
 
-    try {
-      const user = await signInWithEmail(data); // change with react query
-      // set user rigth here!
-      console.log(user);
-      navigate("/home");
-    } catch (err) {
-      setError("root.server", {
-        type: "server",
-        message: err.message + ". Try again",
-      });
-    }
+    login(data, {
+      onSuccess: () => {
+        navigate("/home", { replace: true });
+      },
+      onError: (err) => {
+        setError("root.server", {
+          type: "server",
+          message: err.message + ". Try again",
+        });
+      },
+    });
   }
 
   return {
     register,
     handleSubmit: handleSubmit(onSubmit),
     errors,
-    setError,
-    clearErrors,
+    isLoggingIn,
   };
 }

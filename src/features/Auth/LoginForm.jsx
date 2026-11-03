@@ -13,9 +13,10 @@ import AuthInput from "./AuthInput";
 import Socials from "./Socials";
 import { useLoginForm } from "./useLoginForm";
 import { validations } from "../../utils/constants";
+import { ClipLoader } from "react-spinners";
 
 function LoginForm() {
-  const { register, handleSubmit, errors } = useLoginForm();
+  const { isLoggingIn, register, handleSubmit, errors } = useLoginForm();
 
   return (
     <AuthForm onSubmit={handleSubmit}>
@@ -24,7 +25,6 @@ function LoginForm() {
         title="Sign in with email"
         caption="Get back to applying for that new job!"
       />
-      {/* // caption="Apply for your next developer job. For Free" */}
       <AuthDetails>
         <AuthInput
           Icon={HiEnvelope}
@@ -66,7 +66,14 @@ function LoginForm() {
           >
             Sign up
           </Button>
-          <Form.Submit size="large" className="text-preset-5!">
+          <Form.Submit
+            size="large"
+            className="text-preset-5!"
+            disabled={isLoggingIn}
+          >
+            {isLoggingIn && (
+              <ClipLoader className="mr-2 -ml-2" color="white" size={16} />
+            )}
             Log In
           </Form.Submit>
         </div>
