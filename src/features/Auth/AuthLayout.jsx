@@ -1,3 +1,4 @@
+import { Outlet } from "react-router";
 import Container from "../../ui/Container";
 import Header from "../../ui/Header";
 import Navbar from "../../ui/Navbar";
@@ -11,7 +12,7 @@ function AuthLayout({ children }) {
         </Container>
       </Header>
       <Container className="self-center justify-self-center">
-        {children}
+        <Outlet />
       </Container>
     </div>
   );

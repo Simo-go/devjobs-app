@@ -10,6 +10,8 @@ import AppLayout from "./ui/AppLayout";
 import JobLayout from "./ui/JobLayout";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import Confirmation from "./pages/Confirmation";
+import AuthLayout from "./features/Auth/AuthLayout";
 
 const queryClient = new QueryClient();
 
@@ -20,8 +22,11 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route index element={<Navigate to="/home" replace />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route element={<AuthLayout />}>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/confirm-account" element={<Confirmation />} />
+          </Route>
           <Route element={<JobLayout />}>
             <Route path="/home" element={<Jobs />} />
           </Route>

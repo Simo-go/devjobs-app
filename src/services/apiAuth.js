@@ -1,14 +1,19 @@
 import { supabase } from "./supabase";
 
-export async function signUpUser() {
+export async function signUpUser(userData) {
   const { data, error } = await supabase.auth.signUp({
-    email: "rndsaasproject@gmail.com",
-    password: "@Testing",
+    email: userData.email,
+    password: userData.password,
     options: {
       emailRedirectTo: "http://localhost:5173/home",
+      data: {
+        first_name: userData.firstName,
+        last_name: userData.lastName,
+      },
     },
   });
 
+  if (error) throw error;
   console.log(data, error);
 }
 

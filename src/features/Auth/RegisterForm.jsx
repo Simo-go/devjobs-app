@@ -8,19 +8,37 @@ import AuthForm from "./AuthForm";
 import AuthFormHeader from "./AuthFormHeader";
 import AuthInput from "./AuthInput";
 import Socials from "./Socials";
+import useSignUpUser from "./useSignUpUser";
+import LoadingSpinner from "../../ui/LoadingSpinner";
+import { ClipLoader } from "react-spinners";
 
 function RegisterForm() {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors },
     watch,
   } = useForm();
 
+  function onError() {
+    setError("root.auth", {
+      type: "server",
+      message: "Registration failed, try again.",
+    });
+  }
+
+  const { mutate, isCreatingUser } = useSignUpUser();
+
+  // eslint-disable-next-line react-hooks/incompatible-library
   const password = watch("password", "");
 
   function onSubmit(data) {
     console.log(data);
+
+    mutate(data, {
+      onError: (error) => onError(),
+    });
   }
 
   return (
@@ -88,7 +106,11 @@ function RegisterForm() {
         <Form.Submit
           size="normal"
           className="text-preset-5! xs:text-preset-4-bold"
+          disabled={isCreatingUser}
         >
+          {isCreatingUser && (
+            <ClipLoader className="mr-2" color="white" size={16} />
+          )}
           Get Started
         </Form.Submit>
       </div>
