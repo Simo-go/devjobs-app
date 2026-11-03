@@ -4,11 +4,11 @@ import { signUpUser } from "../../services/apiAuth";
 export default function useSignUpUser() {
   const {
     data,
-    mutate,
+    mutate: signUp,
     isPending: isCreatingUser,
   } = useMutation({
     mutationFn: (userData) => signUpUser(userData),
   });
 
-  return { data, mutate, isCreatingUser };
+  return { data, signUp, isCreatingUser };
 }

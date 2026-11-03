@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { HiEnvelope, HiLockClosed, HiUserPlus } from "react-icons/hi2";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import Form from "../../ui/Form";
 import { validations } from "../../utils/constants";
 import AuthDetails from "./AuthDetails";
@@ -17,27 +17,32 @@ function RegisterForm() {
     register,
     handleSubmit,
     setError,
+    clearErrors,
     formState: { errors },
     watch,
   } = useForm();
+  const navigate = useNavigate();
 
-  function onError() {
+  function onError(error) {
+    clearErrors("root.auth");
+
     setError("root.auth", {
       type: "server",
       message: "Registration failed, try again.",
     });
   }
 
-  const { mutate, isCreatingUser } = useSignUpUser();
+  const { signUp, isCreatingUser } = useSignUpUser();
 
   // eslint-disable-next-line react-hooks/incompatible-library
   const password = watch("password", "");
 
   function onSubmit(data) {
-    console.log(data);
-
-    mutate(data, {
-      onError: (error) => onError(),
+    signUp(data, {
+      onError: (error) => onError(error),
+      onSuccess: () => {
+        navigate("/confirm-account", { replace: true });
+      },
     });
   }
 
@@ -102,7 +107,12 @@ function RegisterForm() {
           disabled={!!errors.password || !password}
         />
       </AuthDetails>
-      <div className="mb-8 flex gap-3 justify-self-end">
+      <div className="mb-8 flex flex-col justify-self-end">
+        {errors.root?.auth && (
+          <Form.Error className="mb-2 block text-right">
+            {errors.root?.auth.message}
+          </Form.Error>
+        )}
         <Form.Submit
           size="normal"
           className="text-preset-5! xs:text-preset-4-bold"
