@@ -25,7 +25,12 @@ export async function signInWithEmail({ email, password }) {
 
   if (error) throw error;
 
-  console.log(data);
-
   return data;
+}
+
+export async function getUser() {
+  const { data, error } = await supabase.auth.getClaims();
+  if (error) throw error;
+
+  return data?.claims ?? null;
 }

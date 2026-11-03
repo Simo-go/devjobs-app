@@ -12,6 +12,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Confirmation from "./pages/Confirmation";
 import AuthLayout from "./features/Auth/AuthLayout";
+import ProtectedRoute from "./ui/ProtectedRoute";
 
 const queryClient = new QueryClient();
 
@@ -33,9 +34,11 @@ function App() {
           <Route element={<AppLayout />}>
             {/* <Route index element={<Navigate to="/home" replace />} /> */}
             <Route path="job/:company/:id" element={<Job />} />
-            <Route path="/bookmarks" element={<Bookmarks />} />
-            <Route path="/applications" element={<Applications />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route element={<ProtectedRoute />}>
+              <Route path="/bookmarks" element={<Bookmarks />} />
+              <Route path="/applications" element={<Applications />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+            </Route>
           </Route>
         </Routes>
       </BrowserRouter>
