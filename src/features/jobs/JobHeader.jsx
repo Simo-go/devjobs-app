@@ -27,7 +27,7 @@ function JobHeader({ job }) {
         className="mb-8 inline-flex w-auto items-center gap-2 md:mb-4"
       >
         <HiMiniArrowLongLeft className="size-6" />
-        <span className="text-prest-5 font-normal">Go back</span>
+        <span className="text-preset-5 font-normal">Go back</span>
       </Button>
       <div className="md:flex md:items-center md:justify-between">
         <div>

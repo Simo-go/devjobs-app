@@ -15,7 +15,7 @@ function JobCardHeader({ job }) {
         bgColor={logoBgColor}
         className="absolute top-0 left-8 translate-y-[-50%]"
       />
-      <span className="mb-1 block text-prest-5 text-sm text-[.75rem] font-medium tracking-wide text-slate-500 uppercase">
+      <span className="text-preset-5 mb-1 block text-sm text-[.75rem] font-medium tracking-wide text-slate-500 uppercase">
         {companyName}
       </span>
       <h2 className="text-preset-3 text-slate-900">{position}</h2>

@@ -7,7 +7,7 @@ function JobCardDetails({ job }) {
   return (
     <>
       <section className="mb-6">
-        <p className="line-clamp-2 text-prest-5 leading-relaxed font-normal text-[#7F8FA4]">
+        <p className="text-preset-5 line-clamp-2 leading-relaxed font-normal text-[#7F8FA4]">
           {description}
         </p>
       </section>

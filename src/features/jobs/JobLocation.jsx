@@ -1,6 +1,6 @@
 function JobLocation({ location }) {
   return (
-    <address className="grow text-prest-5 text-indigo-500 not-italic">
+    <address className="text-preset-5 grow text-indigo-500 not-italic">
       {location}
     </address>
   );

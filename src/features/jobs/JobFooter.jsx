@@ -21,7 +21,7 @@ function JobFooter({ job }) {
             <Button
               size="large"
               variant="primary"
-              className="text-prest-5! duration-400! xs:text-preset-4-bold!"
+              className="text-preset-5! duration-400! xs:text-preset-4-bold!"
               link
               to={applyUrl}
               target="_blank"
@@ -44,7 +44,7 @@ function JobFooter({ job }) {
         <Button
           size="large"
           variant="primary"
-          className="text-prest-5! duration-400! xs:text-preset-4-bold!"
+          className="text-preset-5! duration-400! xs:text-preset-4-bold!"
           link
           to={applyUrl}
           target="_blank"

@@ -47,7 +47,7 @@ Form.Input = function ({ name, className, onChange, ...props }) {
       {...props}
       className={clsx(
         className,
-        "w-full truncate text-preset-4-regular text-slate-950 outline-0 placeholder-shown:text-ellipsis autofill:shadow-[inset_0_0_0_1000px_white]",
+        "w-full truncate text-preset-4-regular text-slate-900 outline-0 placeholder:text-slate-900/50 placeholder-shown:text-ellipsis autofill:shadow-[inset_0_0_0_1000px_white]",
       )}
       value={formState[name] ?? ""}
       onChange={(e) => {
@@ -113,6 +113,10 @@ Form.InputContainer = function ({ className, children }) {
 
 Form.Container = function ({ className, children }) {
   return <div className={clsx(className, "p-4 md:px-6")}>{children}</div>;
+};
+
+Form.Header = function ({ className, children }) {
+  return <header className={clsx(className)}>{children}</header>;
 };
 
 // eslint-disable-next-line react-refresh/only-export-components

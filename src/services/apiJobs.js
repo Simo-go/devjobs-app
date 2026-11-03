@@ -21,7 +21,7 @@ export async function insertBulkJobs(jobs) {
 }
 
 export async function insertJob(job) {
-  const { data, error } = await supabase
+  const { data } = await supabase
     .from("companies")
     .select("id, name")
     .eq("name", job.company.name);
@@ -40,6 +40,7 @@ export async function insertJob(job) {
 
   filteredJob["company_id"] = id;
 
+  // eslint-disable-next-line no-unused-vars
   const { data: updateData, error: updateError } = await supabase
     .from("jobs")
     .insert(filteredJob);
