@@ -7,7 +7,7 @@ export function useClickOutside(capture = true, ref, handler) {
         if (
           !ref.current ||
           ref.current.contains(e.target) ||
-          e.target.closest("button[type='submit']")
+          e.target.closest("button")
         )
           return;
         console.log(e.target);

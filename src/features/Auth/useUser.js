@@ -12,7 +12,9 @@ function useUser() {
     retry: 0,
   });
 
-  return { user, isAuthenticating, authError };
+  const isAuthenticated = user?.role === "authenticated";
+
+  return { user, isAuthenticating, authError, isAuthenticated };
 }
 
 export default useUser;

@@ -14,6 +14,7 @@ import AppLayout from "./ui/AppLayout";
 import AuthenticatedRoute from "./ui/AuthenticatedRoute";
 import JobLayout from "./ui/JobLayout";
 import GuestRoute from "./ui/GuestRoute";
+import Profile from "./pages/Profile";
 
 const queryClient = new QueryClient();
 
@@ -44,6 +45,7 @@ function App() {
             <Route element={<AuthenticatedRoute />}>
               <Route path="/bookmarks" element={<Bookmarks />} />
               <Route path="/applications" element={<Applications />} />
+              <Route path="/profile" element={<Profile />} />
               <Route path="/dashboard" element={<Dashboard />} />
             </Route>
           </Route>
