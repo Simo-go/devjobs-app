@@ -5,8 +5,6 @@ import Input from "../../ui/Input";
 import useProfileAttribute from "./useProfileAttribute";
 
 function ProfileAttribute({ title, inputName, defaultInputValue }) {
-  console.log(defaultInputValue);
-
   const {
     isEditing,
     inputRef,

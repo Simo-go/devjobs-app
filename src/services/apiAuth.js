@@ -64,8 +64,10 @@ export async function updateProfile({ field, value }) {
 
   console.log(updateObj);
 
-  const { data: user, error } = await supabase.auth.updateUser(updateObj);
-  console.log(user);
+  const {
+    data: { user },
+    error,
+  } = await supabase.auth.updateUser(updateObj);
 
   if (error) throw error;
 

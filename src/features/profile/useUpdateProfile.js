@@ -7,13 +7,9 @@ function useUpdateProfile() {
     isPending: isUpdatingProfile,
     error: updateError,
   } = useMutation({
-    mutationFn: ({ field, value }) => {
-      apiUpdateProfile({ field, value });
-    },
+    mutationFn: ({ field, value }) => apiUpdateProfile({ field, value }),
     onSuccess: (data, _, __, { client: queryClient }) => {
-      const user = queryClient.getQueryData(["user"]);
-      console.log(data);
-      console.log(user);
+      queryClient.setQueryData(["user"], data);
     },
   });
 

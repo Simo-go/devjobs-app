@@ -10,6 +10,8 @@ function useProfileAttribute(inputName, defaultInputValue) {
     defaultValues: {
       [inputName]: defaultInputValue,
     },
+    values: { [inputName]: defaultInputValue },
+    resetOptions: { keepDirtyValues: true },
   });
   const { updateProfile, updateError, isUpdatingProfile } = useUpdateProfile();
 
@@ -30,7 +32,12 @@ function useProfileAttribute(inputName, defaultInputValue) {
 
   function handleDiscardEdit() {
     setIsEditing(false);
-    reset();
+    reset(
+      { [inputName]: defaultInputValue },
+      {
+        keepDirtyValues: false,
+      },
+    );
   }
 
   return {
