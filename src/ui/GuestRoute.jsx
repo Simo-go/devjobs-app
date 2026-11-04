@@ -1,17 +1,18 @@
 import { Navigate } from "react-router";
-import useUser from "../features/Auth/useUser";
+import useAuth from "../features/Auth/useAuth";
 import LoadingSpinner from "./LoadingSpinner";
 
 function GuestRoute({ children }) {
-  const { isAuthenticating, user, error } = useUser();
+  const { isAuthenticated, isAuthenticating, authError } = useAuth();
+  console.log(isAuthenticating, isAuthenticated);
 
   if (isAuthenticating) {
     return <LoadingSpinner className="mt-40" />;
   }
 
-  if (user) return <Navigate to="home" />;
+  if (isAuthenticated) return <Navigate to="home" />;
 
-  if (error || !user) return children;
+  if (authError || !isAuthenticated) return children;
 }
 
 export default GuestRoute;

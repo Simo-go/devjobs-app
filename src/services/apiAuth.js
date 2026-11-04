@@ -30,10 +30,14 @@ export async function signInWithEmail({ email, password }) {
 }
 
 export async function getUser() {
-  const { data, error } = await supabase.auth.getClaims();
+  const {
+    data: { user },
+    error,
+  } = await supabase.auth.getUser();
+
   if (error) throw error;
 
-  return data?.claims ?? null;
+  return user;
 }
 export async function logOut() {
   const { error } = await supabase.auth.signOut({ scope: "local" });
@@ -66,4 +70,11 @@ export async function updateProfile({ field, value }) {
   if (error) throw error;
 
   return user;
+}
+
+export async function getClaims() {
+  const { data, error } = await supabase.auth.getClaims();
+  if (error) throw error;
+
+  return data?.claims ?? null;
 }

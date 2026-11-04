@@ -1,10 +1,9 @@
 import { Navigate } from "react-router";
-import useUser from "../features/Auth/useUser";
+import useAuth from "../features/Auth/useAuth";
 import LoadingSpinner from "./LoadingSpinner";
 
 function AuthenticatedRoute({ children }) {
-  const { user, isAuthenticating, authError } = useUser();
-  console.log(user, isAuthenticating, authError);
+  const { isAuthenticated, isAuthenticating, authError } = useAuth();
 
   if (authError) return <Navigate to="/login" replace />;
 
@@ -12,7 +11,7 @@ function AuthenticatedRoute({ children }) {
     return <LoadingSpinner className="mt-40" />;
   }
 
-  if (!user) return <Navigate to="/home" replace />;
+  if (!isAuthenticated) return <Navigate to="/login" replace />;
 
   return children;
 }

@@ -4,17 +4,16 @@ import { getUser } from "../../services/apiAuth";
 function useUser() {
   const {
     data: user,
-    isPending: isAuthenticating,
-    error: authError,
+    isPending: isLoadingUser,
+    error: userError,
   } = useQuery({
     queryKey: ["user"],
     queryFn: getUser,
-    retry: 0,
   });
 
   const isAuthenticated = user?.role === "authenticated";
 
-  return { user, isAuthenticating, authError, isAuthenticated };
+  return { user, isLoadingUser, userError, isAuthenticated };
 }
 
 export default useUser;
