@@ -7,6 +7,10 @@ import ProfileAttributeHeader from "./ProfileAttributeHeader";
 import AttributeEditActions from "./AttributeEditActions";
 
 function ProfileAttribute({ title, inputName, defaultInputValue }) {
+  console.log("INSIDE ATTRIBUTE.");
+
+  console.log(title, inputName, defaultInputValue);
+
   const {
     isEditing,
     inputRef,

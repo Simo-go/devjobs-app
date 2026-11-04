@@ -1,9 +1,21 @@
+import { useState } from "react";
 import ProfileAttribute from "./ProfileAttribute";
 
-function ProfileDetails({ email, firstName, lastName }) {
+function ProfileDetails({ userData }) {
+  const [editedField, setEditedField] = useState("");
+
   return (
     <section className="space-y-8">
-      <ProfileAttribute
+      {Object.values(userData).map(({ field, value, title }) => (
+        <ProfileAttribute
+          key={field}
+          title={title}
+          defaultInputValue={value}
+          inputName={field}
+          type={field === "email" ? "email" : "text"}
+        />
+      ))}
+      {/* <ProfileAttribute
         title="Email"
         type="email"
         defaultInputValue={email}
@@ -20,7 +32,7 @@ function ProfileDetails({ email, firstName, lastName }) {
         type="text"
         defaultInputValue={lastName}
         inputName="last_name"
-      />
+      /> */}
     </section>
   );
 }

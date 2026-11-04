@@ -11,6 +11,25 @@ function ProfileLayout() {
     last_name: lastName,
     email,
   } = user?.user_metadata ?? {};
+  const userData = {
+    firstName: {
+      field: "first_name",
+      title: "First Name",
+      value: firstName,
+    },
+    lastName: {
+      field: "last_name",
+      title: "Last Name",
+      value: lastName,
+    },
+    email: {
+      field: "email",
+      title: "Email",
+      value: email,
+    },
+  };
+
+  console.log(userData);
 
   return (
     <Card
@@ -22,11 +41,7 @@ function ProfileLayout() {
       ) : (
         <>
           <ProfileHeader firstName={firstName} lastName={lastName} />
-          <ProfileDetails
-            firstName={firstName}
-            lastName={lastName}
-            email={email}
-          />
+          <ProfileDetails userData={userData} />
         </>
       )}
     </Card>
