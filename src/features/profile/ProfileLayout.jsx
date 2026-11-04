@@ -1,4 +1,5 @@
 import Card from "../../ui/Card";
+import LoadingSpinner from "../../ui/LoadingSpinner";
 import useUser from "../Auth/useUser";
 import ProfileDetails from "./ProfileDetails";
 import ProfileHeader from "./ProfileHeader";
@@ -17,7 +18,7 @@ function ProfileLayout() {
       tabIndex={-1}
     >
       {isLoadingUser ? (
-        "loading..."
+        <LoadingSpinner />
       ) : (
         <>
           <ProfileHeader firstName={firstName} lastName={lastName} />

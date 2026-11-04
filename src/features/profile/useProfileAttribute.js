@@ -18,11 +18,22 @@ function useProfileAttribute(inputName, defaultInputValue) {
   const { ref: rhfRef, ...rhfFields } = register(inputName);
 
   function onConfirmEdit(data) {
-    if (data[inputName] === defaultInputValue) return;
-    console.log(data[inputName]);
+    if (data[inputName] === defaultInputValue) return setIsEditing(false);
 
-    updateProfile({ field: inputName, value: data[inputName] });
-    // setIsEditing(false);
+    setIsEditing(false);
+
+    updateProfile(
+      { field: inputName, value: data[inputName] },
+      {
+        onSuccess: () => {
+          // add toast
+        },
+        onError: () => {
+          setIsEditing(true);
+          // add error toast
+        },
+      },
+    );
   }
 
   function handleEditField() {
@@ -48,6 +59,8 @@ function useProfileAttribute(inputName, defaultInputValue) {
     rhfRef,
     rhfFields,
     handleSubmit: handleSubmit(onConfirmEdit),
+    updateError,
+    isUpdatingProfile,
   };
 }
 

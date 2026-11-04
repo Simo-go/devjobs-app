@@ -6,14 +6,14 @@ import {
 import { Link } from "react-router";
 import Button from "../../ui/Button";
 import Form from "../../ui/Form";
+import LoadingSpinnerSmall from "../../ui/LoadingSpinnerSmall";
+import { validations } from "../../utils/constants";
 import AuthDetails from "./AuthDetails";
 import AuthForm from "./AuthForm";
 import AuthFormHeader from "./AuthFormHeader";
 import AuthInput from "./AuthInput";
 import Socials from "./Socials";
 import { useLoginForm } from "./useLoginForm";
-import { validations } from "../../utils/constants";
-import { ClipLoader } from "react-spinners";
 
 function LoginForm() {
   const { isLoggingIn, register, handleSubmit, errors } = useLoginForm();
@@ -72,7 +72,11 @@ function LoginForm() {
             disabled={isLoggingIn}
           >
             {isLoggingIn && (
-              <ClipLoader className="mr-2 -ml-2" color="white" size={16} />
+              <LoadingSpinnerSmall
+                className="mr-2 -ml-2"
+                color="white"
+                size={16}
+              />
             )}
             Log In
           </Form.Submit>

@@ -3,6 +3,7 @@ import { HiEnvelope, HiLockClosed, HiUserPlus } from "react-icons/hi2";
 import { Link, useNavigate } from "react-router";
 import { ClipLoader } from "react-spinners";
 import Form from "../../ui/Form";
+import LoadingSpinnerSmall from "../../ui/LoadingSpinnerSmall";
 import { validations } from "../../utils/constants";
 import AuthDetails from "./AuthDetails";
 import AuthForm from "./AuthForm";
@@ -118,7 +119,7 @@ function RegisterForm() {
           disabled={isCreatingUser}
         >
           {isCreatingUser && (
-            <ClipLoader className="mr-2" color="white" size={16} />
+            <LoadingSpinnerSmall className="mr-2" color="white" size={16} />
           )}
           Get Started
         </Form.Submit>

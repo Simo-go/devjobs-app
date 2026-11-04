@@ -49,8 +49,6 @@ export async function logOut() {
 export async function updateProfile({ field, value }) {
   if (!field) throw new Error("Did not provide a field");
 
-  console.log(field, value);
-
   const updateObj =
     field === "email"
       ? {
@@ -61,8 +59,6 @@ export async function updateProfile({ field, value }) {
             [field]: value,
           },
         };
-
-  console.log(updateObj);
 
   const {
     data: { user },
