@@ -1,20 +1,26 @@
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
+import useUpdateProfile from "./useUpdateProfile";
 
-function useProfileAttribute(defaultInputValue) {
+function useProfileAttribute(inputName, defaultInputValue) {
   const [isEditing, setIsEditing] = useState(false);
   const inputRef = useRef();
 
-  const { register, reset } = useForm({
+  const { register, reset, handleSubmit } = useForm({
     defaultValues: {
-      value: defaultInputValue,
+      [inputName]: defaultInputValue,
     },
   });
+  const { updateProfile, updateError, isUpdatingProfile } = useUpdateProfile();
 
-  const { ref: rhfRef, ...rhfFields } = register("value");
+  const { ref: rhfRef, ...rhfFields } = register(inputName);
 
-  function handleConfirmEdit() {
-    setIsEditing(false);
+  function onConfirmEdit(data) {
+    if (data[inputName] === defaultInputValue) return;
+    console.log(data[inputName]);
+
+    updateProfile({ field: inputName, value: data[inputName] });
+    // setIsEditing(false);
   }
 
   function handleEditField() {
@@ -30,11 +36,11 @@ function useProfileAttribute(defaultInputValue) {
   return {
     isEditing,
     inputRef,
-    handleConfirmEdit,
     handleDiscardEdit,
     handleEditField,
     rhfRef,
     rhfFields,
+    handleSubmit: handleSubmit(onConfirmEdit),
   };
 }
 

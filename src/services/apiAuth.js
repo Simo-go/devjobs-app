@@ -1,3 +1,4 @@
+import { PiGameController } from "react-icons/pi";
 import { supabase } from "./supabase";
 
 export async function signUpUser(userData) {
@@ -34,10 +35,35 @@ export async function getUser() {
 
   return data?.claims ?? null;
 }
-
 export async function logOut() {
   const { error } = await supabase.auth.signOut({ scope: "local" });
   console.log(error);
 
   if (error) throw error;
+}
+
+export async function updateProfile({ field, value }) {
+  if (!field) throw new Error("Did not provide a field");
+
+  console.log(field, value);
+
+  const updateObj =
+    field === "email"
+      ? {
+          email: value,
+        }
+      : {
+          data: {
+            [field]: value,
+          },
+        };
+
+  console.log(updateObj);
+
+  const { data: user, error } = await supabase.auth.updateUser(updateObj);
+  console.log(user);
+
+  if (error) throw error;
+
+  return user;
 }

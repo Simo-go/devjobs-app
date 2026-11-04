@@ -4,18 +4,18 @@ import Button from "../../ui/Button";
 import Input from "../../ui/Input";
 import useProfileAttribute from "./useProfileAttribute";
 
-function ProfileAttribute({ title, defaultInputValue }) {
+function ProfileAttribute({ title, inputName, defaultInputValue }) {
   console.log(defaultInputValue);
 
   const {
     isEditing,
     inputRef,
-    handleConfirmEdit,
+    handleSubmit,
     handleDiscardEdit,
     handleEditField,
     rhfFields,
     rhfRef,
-  } = useProfileAttribute(defaultInputValue);
+  } = useProfileAttribute(inputName, defaultInputValue);
 
   return (
     <div>
@@ -51,7 +51,7 @@ function ProfileAttribute({ title, defaultInputValue }) {
         </div>
         <div className="flex gap-1">
           <Button
-            onClick={handleConfirmEdit}
+            onClick={handleSubmit}
             className={clsx(
               "size-6 bg-transparent p-1 transition-opacity duration-100 hover:bg-slate-100",
               isEditing && "opacity-100",
