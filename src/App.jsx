@@ -12,10 +12,11 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import AppLayout from "./ui/AppLayout";
 import AuthenticatedRoute from "./ui/AuthenticatedRoute";
-import JobLayout from "./ui/JobLayout";
+import JobsLayout from "./ui/JobsLayout";
 import GuestRoute from "./ui/GuestRoute";
 import Profile from "./pages/Profile";
 import { Toaster } from "react-hot-toast";
+import JobLayout from "./ui/JobLayout";
 
 const queryClient = new QueryClient();
 
@@ -37,18 +38,24 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/confirm-account" element={<Confirmation />} />
           </Route>
-          <Route element={<JobLayout />}>
+          <Route element={<JobsLayout />}>
             <Route path="/home" element={<Jobs />} />
           </Route>
-          <Route element={<AppLayout />}>
+          <Route element={<JobLayout />}>
             {/* <Route index element={<Navigate to="/home" replace />} /> */}
             <Route path="job/:company/:id" element={<Job />} />
-            <Route element={<AuthenticatedRoute />}>
-              <Route path="/bookmarks" element={<Bookmarks />} />
-              <Route path="/applications" element={<Applications />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-            </Route>
+          </Route>
+          <Route
+            element={
+              <AuthenticatedRoute>
+                <AppLayout />
+              </AuthenticatedRoute>
+            }
+          >
+            <Route path="/bookmarks" element={<Bookmarks />} />
+            <Route path="/applications" element={<Applications />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/dashboard" element={<Dashboard />} />
           </Route>
         </Routes>
       </BrowserRouter>

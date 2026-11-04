@@ -1,5 +1,9 @@
+import useUser from "../features/Auth/useUser";
+import ProfileLayout from "../features/profile/ProfileLayout";
+import Card from "../ui/Card";
+
 function Profile() {
-  return <div>PROFILE PAGE</div>;
+  return <ProfileLayout />;
 }
 
 export default Profile;

@@ -7,6 +7,7 @@ import Button from "./Button";
 import Checkbox from "./Checkbox";
 import { useSearchParams } from "react-router";
 import { mapSearchParamsToObj } from "../utils/helpers";
+import Input from "./Input";
 
 const FormContext = createContext();
 
@@ -42,13 +43,10 @@ Form.Input = function ({ id, className, onChange, ...props }) {
   const { formState, updateField, formName } = useContext(FormContext);
 
   return (
-    <input
+    <Input
       id={id}
       {...props}
-      className={clsx(
-        className,
-        "w-full truncate text-preset-4-regular text-slate-900 outline-0 placeholder:text-slate-900/50 placeholder-shown:text-ellipsis autofill:shadow-[inset_0_0_0_1000px_var(--color-slate-100)] autofill:[-webkit-text-fill-color:var(--color-slate-900)] disabled:cursor-not-allowed",
-      )}
+      className={className}
       value={formState[id] ?? ""}
       onChange={(e) => {
         updateField(id, e.target.value);

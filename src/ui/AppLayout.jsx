@@ -6,13 +6,13 @@ import Navbar from "./Navbar";
 
 function AppLayout() {
   return (
-    <div className="min-h-svh bg-slate-100">
+    <div className="grid min-h-svh grid-rows-[auto_1fr] bg-slate-100">
       <Header>
-        <Container className="pt-8 pb-18">
+        <Container className="py-8">
           <Navbar />
         </Container>
       </Header>
-      <Main>
+      <Main className="grid place-items-center">
         <Container>
           <Outlet />
         </Container>

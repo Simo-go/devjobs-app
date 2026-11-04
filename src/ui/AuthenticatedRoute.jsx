@@ -1,8 +1,8 @@
-import { Navigate, Outlet } from "react-router";
+import { Navigate } from "react-router";
 import useUser from "../features/Auth/useUser";
 import LoadingSpinner from "./LoadingSpinner";
 
-function AuthenticatedRoute() {
+function AuthenticatedRoute({ children }) {
   const { user, isAuthenticating, authError } = useUser();
   console.log(user, isAuthenticating, authError);
 
@@ -14,7 +14,7 @@ function AuthenticatedRoute() {
 
   if (!user) return <Navigate to="/home" replace />;
 
-  return <Outlet />;
+  return children;
 }
 
 export default AuthenticatedRoute;
