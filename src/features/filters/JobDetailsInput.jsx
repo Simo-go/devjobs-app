@@ -13,6 +13,7 @@ function JobDetailsInput() {
       <Form.Input
         id="q"
         placeholder="Filter by title, companies, expertise, ..."
+        className="autofill:shadow-[inset_0_0_0_1000px_var(--color-neutral-0)]!"
       />
     </Form.InputContainer>
   );

@@ -34,3 +34,10 @@ export async function getUser() {
 
   return data?.claims ?? null;
 }
+
+export async function logOut() {
+  const { error } = await supabase.auth.signOut({ scope: "local" });
+  console.log(error);
+
+  if (error) throw error;
+}

@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { HiEnvelope, HiLockClosed, HiUserPlus } from "react-icons/hi2";
 import { Link, useNavigate } from "react-router";
+import { ClipLoader } from "react-spinners";
 import Form from "../../ui/Form";
 import { validations } from "../../utils/constants";
 import AuthDetails from "./AuthDetails";
@@ -9,8 +10,6 @@ import AuthFormHeader from "./AuthFormHeader";
 import AuthInput from "./AuthInput";
 import Socials from "./Socials";
 import useSignUpUser from "./useSignUpUser";
-import LoadingSpinner from "../../ui/LoadingSpinner";
-import { ClipLoader } from "react-spinners";
 
 function RegisterForm() {
   const {

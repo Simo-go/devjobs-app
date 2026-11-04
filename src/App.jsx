@@ -15,6 +15,7 @@ import AuthenticatedRoute from "./ui/AuthenticatedRoute";
 import JobLayout from "./ui/JobLayout";
 import GuestRoute from "./ui/GuestRoute";
 import Profile from "./pages/Profile";
+import { Toaster } from "react-hot-toast";
 
 const queryClient = new QueryClient();
 
@@ -51,6 +52,7 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
+      <Toaster position="top-center" gutter={8} />
     </QueryClientProvider>
   );
 }

@@ -11,7 +11,11 @@ function LocationInput({ className }) {
       >
         <IconLocation />
       </Form.Label>
-      <Form.Input id="loc" placeholder="Filter by location" />
+      <Form.Input
+        id="loc"
+        placeholder="Filter by location"
+        className="autofill:shadow-[inset_0_0_0_1000px_var(--color-neutral-0)]!"
+      />
     </Form.InputContainer>
   );
 }
