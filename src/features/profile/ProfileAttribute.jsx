@@ -7,10 +7,6 @@ import ProfileAttributeHeader from "./ProfileAttributeHeader";
 import AttributeEditActions from "./AttributeEditActions";
 
 function ProfileAttribute({ title, inputName, defaultInputValue }) {
-  console.log("INSIDE ATTRIBUTE.");
-
-  console.log(title, inputName, defaultInputValue);
-
   const {
     isEditing,
     inputRef,
@@ -25,9 +21,11 @@ function ProfileAttribute({ title, inputName, defaultInputValue }) {
   return (
     <div>
       <ProfileAttributeHeader
+        inputName={inputName}
         title={title}
         handleEditField={handleEditField}
         isEditing={isEditing}
+        isUpdatingProfile={isUpdatingProfile}
       />
       <hr className="mb-4 border-t border-t-slate-900/20" />
       <div className="grid grid-cols-[1fr_auto] items-center gap-4">

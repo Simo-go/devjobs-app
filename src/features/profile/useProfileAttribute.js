@@ -1,9 +1,9 @@
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import useUpdateProfile from "./useUpdateProfile";
+import { useProfileEdit } from "./ProfileEditContext";
 
 function useProfileAttribute(inputName, defaultInputValue) {
-  const [isEditing, setIsEditing] = useState(false);
   const inputRef = useRef();
 
   const { register, reset, handleSubmit } = useForm({
@@ -14,22 +14,26 @@ function useProfileAttribute(inputName, defaultInputValue) {
     resetOptions: { keepDirtyValues: true },
   });
   const { updateProfile, updateError, isUpdatingProfile } = useUpdateProfile();
+  const { setEditedFieldName, editedFieldName } = useProfileEdit();
 
   const { ref: rhfRef, ...rhfFields } = register(inputName);
+  const isEditing = editedFieldName === inputName;
 
   function onConfirmEdit(data) {
-    if (data[inputName] === defaultInputValue) return setIsEditing(false);
+    if (data[inputName] === defaultInputValue) return setEditedFieldName("");
 
-    setIsEditing(false);
+    // setIsEditing(false);
 
     updateProfile(
       { field: inputName, value: data[inputName] },
       {
         onSuccess: () => {
+          setEditedFieldName("");
           // add toast
         },
         onError: () => {
-          setIsEditing(true);
+          // setIsEditing(true);
+          setEditedFieldName(inputName);
           // add error toast
         },
       },
@@ -37,12 +41,16 @@ function useProfileAttribute(inputName, defaultInputValue) {
   }
 
   function handleEditField() {
-    setIsEditing((bool) => !bool);
+    // setIsEditing((bool) => !bool);
+    setEditedFieldName((prevInputName) =>
+      prevInputName === inputName ? "" : inputName,
+    );
     isEditing ? inputRef.current.blur() : inputRef.current.focus();
   }
 
   function handleDiscardEdit() {
-    setIsEditing(false);
+    // setIsEditing(false);
+    setEditedFieldName("");
     reset(
       { [inputName]: defaultInputValue },
       {

@@ -12,9 +12,15 @@ function AttributeEditActions({
 }) {
   if (isUpdatingProfile) {
     return (
-      <AttributeEditButton isEditing={isEditing}>
+      <div
+        className={clsx(
+          isEditing && "opacity-100",
+          !isEditing && "opacity-0",
+          "size-6 bg-transparent p-1",
+        )}
+      >
         <LoadingSpinnerSmall color="var(--color-indigo-500)" size={16} />
-      </AttributeEditButton>
+      </div>
     );
   }
 
