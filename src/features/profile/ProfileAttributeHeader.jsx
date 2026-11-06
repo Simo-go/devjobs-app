@@ -21,8 +21,8 @@ function ProfileAttributeHeader({
         onClick={handleEditField}
         className={clsx(
           "size-6 bg-transparent p-1 transition-[opacity,color] duration-100 hover:bg-slate-100 disabled:bg-transparent",
-          !isEditing && "opacity-100",
-          isEditing && "opacity-0",
+          !isEditing && "visible opacity-100",
+          isEditing && "invisible opacity-0",
         )}
         disabled={editedFieldName !== "" && editedFieldName !== inputName}
       >

@@ -28,14 +28,19 @@ function AttributeEditActions({
     <div className="flex gap-1">
       <AttributeEditButton
         onClick={handleSubmit}
-        className={clsx(isEditing && "opacity-100", !isEditing && "opacity-0")}
+        className={clsx(
+          isEditing && "visible opacity-100",
+          !isEditing && "invisible opacity-0",
+        )}
       >
         <HiCheck className="size-4 stroke-1 text-indigo-500 hover:text-indigo-500/60" />
       </AttributeEditButton>
       <AttributeEditButton
         onClick={handleDiscardEdit}
-        isEditing={isEditing}
-        className={clsx(isEditing && "opacity-100", !isEditing && "opacity-0")}
+        className={clsx(
+          isEditing && "visible opacity-100",
+          !isEditing && "invisible opacity-0",
+        )}
       >
         <HiMiniXMark className="size-4 stroke-1 text-red-500 hover:text-red-500/60" />
       </AttributeEditButton>

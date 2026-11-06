@@ -7,7 +7,7 @@ function AttributeEditButton({ children, className, ...props }) {
       {...props}
       className={clsx(
         className,
-        "size-6 bg-transparent p-1 transition-opacity duration-100 hover:bg-slate-100",
+        "size-6 bg-transparent p-1 transition-[opacity,visibility] duration-100 hover:bg-slate-100",
       )}
     >
       {children}
