@@ -11,7 +11,10 @@ function useUpdateProfile() {
     onSuccess: (data, _, __, { client: queryClient }) => {
       queryClient.setQueryData(["user"], data);
     },
+    networkMode: "always",
   });
+
+  console.log(updateError);
 
   return { updateProfile, isUpdatingProfile, updateError };
 }

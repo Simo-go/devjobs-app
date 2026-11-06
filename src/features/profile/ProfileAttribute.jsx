@@ -4,6 +4,7 @@ import AttributeEditActions from "./AttributeEditActions";
 import ProfileAttributeHeader from "./ProfileAttributeHeader";
 import useProfileAttribute from "./useProfileAttribute";
 import { useEffect } from "react";
+import toast from "react-hot-toast";
 
 function ProfileAttribute({ title, field, inputValue }) {
   const {
@@ -20,9 +21,10 @@ function ProfileAttribute({ title, field, inputValue }) {
 
   useEffect(
     function () {
-      if (Object.keys(validationErrors).length) console.log(validationErrors);
+      if (Object.keys(validationErrors).length)
+        toast.error(validationErrors[field].message);
     },
-    [validationErrors],
+    [validationErrors, field],
   );
 
   return (

@@ -1,9 +1,10 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import useUpdateProfile from "./useUpdateProfile";
 import { useProfileEdit } from "./ProfileEditContext";
 import { validations } from "../../utils/constants";
 import { convertSnakecaseToCamelcase } from "../../utils/helpers";
+import toast from "react-hot-toast";
 
 function useProfileAttribute(inputName, inputValue) {
   const inputRef = useRef(); // used to remove input focus
@@ -38,11 +39,13 @@ function useProfileAttribute(inputName, inputValue) {
         onSuccess: () => {
           setEditedFieldName("");
           // add toast
+          toast.success("Profile successfully updated!");
         },
         onError: () => {
           // setIsEditing(true);
           setEditedFieldName(inputName);
           // add error toast
+          toast.error("Profile could not be updated. Please try again.");
         },
       },
     );
@@ -53,7 +56,6 @@ function useProfileAttribute(inputName, inputValue) {
     setEditedFieldName((prevInputName) =>
       prevInputName === inputName ? "" : inputName,
     );
-    isEditing ? inputRef.current.blur() : inputRef.current.focus();
   }
 
   function handleDiscardEdit() {
@@ -66,6 +68,14 @@ function useProfileAttribute(inputName, inputValue) {
       },
     );
   }
+
+  useEffect(
+    function () {
+      if (!isEditing) inputRef.current.blur();
+      else inputRef.current.focus();
+    },
+    [isEditing],
+  );
 
   return {
     isEditing,

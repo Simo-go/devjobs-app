@@ -11,7 +11,7 @@ export const validations = {
       message: "must contain at least three letters",
     },
     pattern: {
-      value: /[a-zA-Z\s]+/g,
+      value: /^[a-zA-Z\s]+$/g,
       message: "Can only contain letters and whitespace",
     },
   },
