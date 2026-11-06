@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import Button from "../../ui/Button";
 import Menu from "../../ui/Menu";
 import useLogout from "../Auth/useLogout";
@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 
 function Profile() {
   const { logOut, isLoggingOut } = useLogout();
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -36,10 +37,12 @@ function Profile() {
                     toast.error("Could not log out. Please try again.", {
                       id: logOutToastId,
                     }),
-                  onSuccess: () =>
+                  onSuccess: () => {
                     toast.success("You have been successfully logged out.", {
                       id: logOutToastId,
-                    }),
+                    });
+                    navigate("/home", { replace: true });
+                  },
                 });
               }}
             >
