@@ -1,12 +1,11 @@
 import clsx from "clsx";
-import { HiCheck, HiMiniPencil, HiMiniXMark } from "react-icons/hi2";
-import Button from "../../ui/Button";
 import Input from "../../ui/Input";
-import useProfileAttribute from "./useProfileAttribute";
-import ProfileAttributeHeader from "./ProfileAttributeHeader";
 import AttributeEditActions from "./AttributeEditActions";
+import ProfileAttributeHeader from "./ProfileAttributeHeader";
+import useProfileAttribute from "./useProfileAttribute";
+import { useEffect } from "react";
 
-function ProfileAttribute({ title, inputName, defaultInputValue }) {
+function ProfileAttribute({ title, field, inputValue }) {
   const {
     isEditing,
     inputRef,
@@ -15,13 +14,21 @@ function ProfileAttribute({ title, inputName, defaultInputValue }) {
     handleEditField,
     rhfFields,
     rhfRef,
+    validationErrors,
     isUpdatingProfile,
-  } = useProfileAttribute(inputName, defaultInputValue);
+  } = useProfileAttribute(field, inputValue);
+
+  useEffect(
+    function () {
+      if (Object.keys(validationErrors).length) console.log(validationErrors);
+    },
+    [validationErrors],
+  );
 
   return (
     <div>
       <ProfileAttributeHeader
-        inputName={inputName}
+        inputName={field}
         title={title}
         handleEditField={handleEditField}
         isEditing={isEditing}

@@ -29,8 +29,6 @@ function ProfileLayout() {
     },
   };
 
-  console.log(userData);
-
   return (
     <Card
       className="mx-auto flex max-w-150 flex-col p-10 text-slate-900"

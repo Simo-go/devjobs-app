@@ -61,3 +61,15 @@ export function mapSearchParamsToObj(searchParams) {
   if (!Object.keys(newObj).length) return null;
   return newObj;
 }
+
+export function convertSnakecaseToCamelcase(str) {
+  if (typeof str === "string") {
+    return str
+      .toLowerCase()
+      .split("_")
+      .map((subStr, idx) =>
+        idx === 0 ? subStr : subStr[0].toUpperCase() + subStr.slice(1),
+      )
+      .join("");
+  }
+}

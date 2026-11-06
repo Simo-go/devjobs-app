@@ -12,8 +12,6 @@ function ProfileAttributeHeader({
 }) {
   const { editedFieldName } = useProfileEdit();
 
-  console.log(inputName, isUpdatingProfile);
-
   return (
     <header className="grid grid-cols-[1fr_auto]">
       <h2 className="text-preset-3 font-medium">{title}</h2>

@@ -2,27 +2,35 @@ import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import useUpdateProfile from "./useUpdateProfile";
 import { useProfileEdit } from "./ProfileEditContext";
+import { validations } from "../../utils/constants";
+import { convertSnakecaseToCamelcase } from "../../utils/helpers";
 
-function useProfileAttribute(inputName, defaultInputValue) {
-  const inputRef = useRef();
+function useProfileAttribute(inputName, inputValue) {
+  const inputRef = useRef(); // used to remove input focus
 
-  const { register, reset, handleSubmit } = useForm({
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { errors: validationErrors },
+  } = useForm({
     defaultValues: {
-      [inputName]: defaultInputValue,
+      [inputName]: inputValue,
     },
-    values: { [inputName]: defaultInputValue },
+    values: { [inputName]: inputValue },
     resetOptions: { keepDirtyValues: true },
   });
+  const { ref: rhfRef, ...rhfFields } = register(
+    inputName,
+    validations[convertSnakecaseToCamelcase(inputName)],
+  );
   const { updateProfile, updateError, isUpdatingProfile } = useUpdateProfile();
-  const { setEditedFieldName, editedFieldName } = useProfileEdit();
 
-  const { ref: rhfRef, ...rhfFields } = register(inputName);
+  const { setEditedFieldName, editedFieldName } = useProfileEdit();
   const isEditing = editedFieldName === inputName;
 
   function onConfirmEdit(data) {
-    if (data[inputName] === defaultInputValue) return setEditedFieldName("");
-
-    // setIsEditing(false);
+    if (data[inputName] === inputValue) return setEditedFieldName("");
 
     updateProfile(
       { field: inputName, value: data[inputName] },
@@ -52,7 +60,7 @@ function useProfileAttribute(inputName, defaultInputValue) {
     // setIsEditing(false);
     setEditedFieldName("");
     reset(
-      { [inputName]: defaultInputValue },
+      { [inputName]: inputValue },
       {
         keepDirtyValues: false,
       },
@@ -66,6 +74,7 @@ function useProfileAttribute(inputName, defaultInputValue) {
     handleEditField,
     rhfRef,
     rhfFields,
+    validationErrors,
     handleSubmit: handleSubmit(onConfirmEdit),
     updateError,
     isUpdatingProfile,

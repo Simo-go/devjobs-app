@@ -9,8 +9,8 @@ function ProfileDetails({ userData }) {
           <ProfileAttribute
             key={field}
             title={title}
-            defaultInputValue={value}
-            inputName={field}
+            inputValue={value}
+            field={field}
             type={field === "email" ? "email" : "text"}
           />
         ))}
