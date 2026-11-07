@@ -49,6 +49,8 @@ export async function logOut() {
 export async function updateProfile({ field, value }) {
   if (!field) throw new Error("Did not provide a field");
 
+  console.log(field, value);
+
   const updateObj =
     field === "email"
       ? {
@@ -64,6 +66,7 @@ export async function updateProfile({ field, value }) {
     data: { user },
     error,
   } = await supabase.auth.updateUser(updateObj);
+  console.error(error);
 
   if (error) throw error;
 

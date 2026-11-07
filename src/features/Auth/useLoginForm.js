@@ -16,8 +16,6 @@ export function useLoginForm() {
   const navigate = useNavigate();
 
   async function onSubmit(data) {
-    clearErrors("root.server");
-
     const toasterId = toast.loading("Logging in...");
 
     login(data, {
@@ -31,8 +29,9 @@ export function useLoginForm() {
         navigate("/home", { replace: true });
       },
       onError: (err) => {
-        toast.success(err.message, { id: toasterId });
+        toast.error(err.message, { id: toasterId });
 
+        clearErrors("root.server");
         setError("root.server", {
           type: "server",
           message: err.message + ". Try again",
