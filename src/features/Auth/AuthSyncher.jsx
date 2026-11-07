@@ -13,6 +13,17 @@ function AuthSyncher() {
           queryClient.setQueryData(["user"], null);
           queryClient.query({ queryKey: ["auth"], queryFn: getClaims });
         }
+
+        if (event === "SIGNED_IN") {
+          queryClient.query({
+            queryKey: ["user"],
+            queryFn: getUser,
+          });
+          queryClient.query({
+            queryKey: ["auth"],
+            queryFn: getClaims,
+          });
+        }
       });
 
       return () => data.subscription.unsubscribe();
