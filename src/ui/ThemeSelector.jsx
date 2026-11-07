@@ -5,7 +5,7 @@ function Selector() {
   return (
     <div
       aria-label="UI theme switcher"
-      className="flex items-center justify-center gap-2 ring-transparent"
+      className="hidden items-center justify-center gap-2 ring-transparent xs:flex"
     >
       <SunLogo className="shrink-0" />
       <input
