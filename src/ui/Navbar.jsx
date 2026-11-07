@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import Logo from "../assets/logo.svg?react";
 import useAuth from "../features/Auth/useAuth";
-import Profile from "../features/profile/Profile";
+import ProfileDropdown from "../features/profile/ProfileDropdown";
 import ThemeSelector from "./ThemeSelector";
 
 function Navbar() {
@@ -14,7 +14,7 @@ function Navbar() {
       </Link>
       <div className="flex gap-4">
         <ThemeSelector />
-        {isAuthenticated && <Profile />}
+        {isAuthenticated && <ProfileDropdown />}
       </div>
     </nav>
   );

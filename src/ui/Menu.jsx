@@ -1,5 +1,6 @@
 import { createContext, use, useRef, useState } from "react";
 import { useClickOutside } from "../hooks/useClickOutside";
+import clsx from "clsx";
 
 const MenuContext = createContext();
 
@@ -32,7 +33,7 @@ Menu.Trigger = function Trigger({ render }) {
     toggleMenu();
   }
 
-  return render(handleToggle);
+  return render(handleToggle, open);
 };
 
 Menu.Item = function MenuItem({ children }) {
@@ -54,11 +55,15 @@ Menu.List = function MenuList({ children }) {
 
   useClickOutside(true, ref, closeMenu);
 
-  if (!open) return null;
+  // if (!open) return null;
 
   return (
     <ul
-      className="absolute top-13 right-0 w-30 rounded-sm bg-slate-100 text-slate-900"
+      className={clsx(
+        "absolute top-13 right-0 z-10 w-30 rounded-sm bg-slate-100 text-slate-900 shadow-lg transition-[opacity,visibility] duration-400",
+        !open && "invisible opacity-0",
+        open && "visible opacity-100",
+      )}
       ref={ref}
     >
       {children}

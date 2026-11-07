@@ -1,5 +1,5 @@
 function Applications() {
-  return <div></div>;
+  return <div>APPLICATIONS</div>;
 }
 
 export default Applications;
