@@ -14,8 +14,6 @@ function useUpdateProfile() {
     networkMode: "always",
   });
 
-  console.log(updateError);
-
   return { updateProfile, isUpdatingProfile, updateError };
 }
 

@@ -17,6 +17,7 @@ import GuestRoute from "./ui/GuestRoute";
 import Profile from "./pages/Profile";
 import { Toaster } from "react-hot-toast";
 import JobLayout from "./ui/JobLayout";
+import AuthSyncher from "./features/Auth/AuthSyncher";
 
 const queryClient = new QueryClient();
 
@@ -24,6 +25,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
+      <AuthSyncher />
       <BrowserRouter>
         <Routes>
           <Route index element={<Navigate to="/home" replace />} />

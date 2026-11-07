@@ -1,11 +1,11 @@
-import ThemeSelector from "./ThemeSelector";
-import Logo from "../assets/logo.svg?react";
 import { Link } from "react-router";
-import useUser from "../features/Auth/useUser";
+import Logo from "../assets/logo.svg?react";
+import useAuth from "../features/Auth/useAuth";
 import Profile from "../features/profile/Profile";
+import ThemeSelector from "./ThemeSelector";
 
 function Navbar() {
-  const { isAuthenticated } = useUser();
+  const { isAuthenticated } = useAuth();
 
   return (
     <nav className="grid grid-cols-[1fr_auto] items-center">

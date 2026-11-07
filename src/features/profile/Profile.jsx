@@ -41,7 +41,6 @@ function Profile() {
                     toast.success("You have been successfully logged out.", {
                       id: logOutToastId,
                     });
-                    navigate("/home", { replace: true });
                   },
                 });
               }}

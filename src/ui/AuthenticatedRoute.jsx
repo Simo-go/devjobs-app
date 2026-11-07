@@ -5,13 +5,11 @@ import LoadingSpinner from "./LoadingSpinner";
 function AuthenticatedRoute({ children }) {
   const { isAuthenticated, isAuthenticating, authError } = useAuth();
 
-  if (authError) return <Navigate to="/login" replace />;
-
   if (isAuthenticating) {
     return <LoadingSpinner className="mt-40" />;
   }
 
-  if (!isAuthenticated) return <Navigate to="/login" replace />;
+  if (!isAuthenticated || authError) return <Navigate to="/login" replace />;
 
   return children;
 }
