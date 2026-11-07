@@ -10,19 +10,25 @@ function Navbar() {
   const { pathname } = useLocation();
 
   return (
-    <nav className="grid grid-cols-[auto_auto] items-center justify-between">
+    <nav className="grid grid-cols-[auto_auto] items-center justify-between gap-6 xs:gap-4">
       <Link to="/">
         <Logo />
       </Link>
-      <div className="flex items-center gap-4">
-        {pathname !== "/home" && (
-          <Button
-            className="rounded-none bg-transparent pb-0.5 text-preset-4-bold text-neutral-0 hover:bg-transparent hover:shadow-[inset_0px_-2px_currentColor]"
-            link
-            to="/home"
-          >
+      <div className="flex items-center gap-2 xs:gap-4">
+        {pathname !== "/home" && isAuthenticated && (
+          <Button variant="navLink" link to="/home">
             Find Jobs
           </Button>
+        )}
+        {!isAuthenticated && (
+          <>
+            <Button variant="navLink" link to="/login">
+              Login
+            </Button>
+            <Button variant="navLink" link to="/register">
+              Create Account
+            </Button>
+          </>
         )}
         <ThemeSelector />
         {isAuthenticated && <ProfileDropdown />}

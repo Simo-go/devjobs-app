@@ -21,7 +21,9 @@ function Button({
       "bg-indigo-500 text-neutral-0 hover:bg-indigo-300": variant === "primary",
       "bg-indigo-500/20 text-preset-4-bold text-indigo-500 hover:bg-indigo-500/10":
         variant === "secondary",
-      "text-slate-900 hover:text-slate-500 ": variant === "outline",
+      "text-slate-900 hover:text-slate-500": variant === "outline",
+      "rounded-none bg-transparent pb-0.5 text-preset-4-bold text-neutral-0 hover:bg-transparent hover:shadow-[inset_0px_-2px_currentColor] text-wrap":
+        variant === "navLink",
     },
   ];
 
