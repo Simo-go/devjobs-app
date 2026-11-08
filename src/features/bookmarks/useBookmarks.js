@@ -6,14 +6,16 @@ export function useBookmarks() {
   const { userId } = useAuth();
 
   const {
-    data: bookmarks,
-    ispending: isLoadingBookmarks,
-    error: bookmarkError,
+    data: bookmarks = [],
+    isPending: isLoadingBookmarks,
+    error: bookmarksError,
+    refetch,
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
   } = useQuery({
     queryKey: ["bookmarks"],
     queryFn: () => getBookmarks({ userId }),
+    retry: 2,
   });
 
-  return { bookmarks, isLoadingBookmarks, bookmarkError };
+  return { bookmarks, isLoadingBookmarks, bookmarksError, refetch };
 }

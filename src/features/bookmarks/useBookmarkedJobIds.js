@@ -14,7 +14,7 @@ export function useBookmarkedJobIds() {
     error: bookmarkedJobIdsError,
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
   } = useQuery({
-    queryKey: ["bookmarks"],
+    queryKey: ["bookmarkedJobIds"],
     queryFn: () => getBookmarkedJobIds({ userId }),
     enabled: isAuthenticated,
   });
