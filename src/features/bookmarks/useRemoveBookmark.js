@@ -11,7 +11,7 @@ export function useRemoveBookmark() {
     onSuccess(_, __, ___, context) {
       const queryClient = context.client;
       console.log("invalidating bookmarks");
-      queryClient.invalidateQueries(["bookmarks"]);
+      return queryClient.invalidateQueries(["bookmarks"]);
     },
   });
 

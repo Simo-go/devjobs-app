@@ -1,20 +1,12 @@
 import toast from "react-hot-toast";
-import useUser from "../Auth/useUser";
+import useAuth from "../Auth/useAuth";
 import { useAddBookmark } from "./useAddBookmark";
-import { useBookmarks } from "./useBookmarks";
 import { useRemoveBookmark } from "./useRemoveBookmark";
 
-export function useBookmarkButton(jobId) {
+export function useBookmarkButton(jobId, isBookmarked) {
   const { addBookmark, isAddingBookmark } = useAddBookmark();
   const { removeBookmark, isRemovingBookmark } = useRemoveBookmark();
-  const { user, isAuthenticated } = useUser();
-
-  const { bookmarks } = useBookmarks();
-
-  const isBookmarked = Boolean(
-    bookmarks.find((bookmark) => bookmark.jobId === jobId),
-  );
-  const userId = user?.id;
+  const { userId, isAuthenticated } = useAuth();
 
   function handleBookmarkClick({ userId, jobId }) {
     if (isBookmarked)
@@ -43,6 +35,5 @@ export function useBookmarkButton(jobId) {
     isRemovingBookmark,
     userId,
     isAuthenticated,
-    isBookmarked,
   };
 }

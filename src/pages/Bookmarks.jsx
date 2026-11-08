@@ -1,7 +1,7 @@
 import { useBookmarks } from "../features/bookmarks/useBookmarks";
 
 function Bookmarks() {
-  const bookmarks = useBookmarks();
+  const { bookmarks, isLoadingBookmarks, bookmarkError } = useBookmarks();
 
   console.log(bookmarks);
 

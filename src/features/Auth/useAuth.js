@@ -14,7 +14,12 @@ function useAuth() {
 
   const isAuthenticated = !!claims?.sub && claims.role === "authenticated";
 
-  return { isAuthenticated, isAuthenticating, authError };
+  return {
+    isAuthenticated,
+    isAuthenticating,
+    authError,
+    userId: isAuthenticated ? claims.sub : null,
+  };
 }
 
 export default useAuth;

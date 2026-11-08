@@ -33,3 +33,21 @@ export async function removeBookmark({ userId, jobId }) {
 
   if (error) throw error;
 }
+
+export async function getBookmarkedJobIds({ userId }) {
+  const { data, error } = await supabase
+    .from("bookmarks")
+    .select(
+      `
+      bookmarkedAt:bookmarked_at,
+      jobId:job_id
+    `,
+    )
+    .eq("user_id", userId);
+
+  if (error) throw error;
+
+  console.log(data);
+
+  return data;
+}

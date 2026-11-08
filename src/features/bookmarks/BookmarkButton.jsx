@@ -4,15 +4,14 @@ import Button from "../../ui/Button";
 import { useBookmarkButton } from "./useBookmarkButton";
 import LoadingSpinnerSmall from "../../ui/LoadingSpinnerSmall";
 
-function BookmarkButton({ jobId }) {
+function BookmarkButton({ jobId, isLoadingBookmarked, isBookmarked }) {
   const {
     handleBookmarkClick,
     isAddingBookmark,
     isRemovingBookmark,
     userId,
     isAuthenticated,
-    isBookmarked,
-  } = useBookmarkButton(jobId);
+  } = useBookmarkButton(jobId, isBookmarked);
 
   if (!isAuthenticated) return null;
 
@@ -22,7 +21,7 @@ function BookmarkButton({ jobId }) {
       onClick={() => handleBookmarkClick({ userId, jobId })}
       disabled={isAddingBookmark || isRemovingBookmark}
     >
-      {isAddingBookmark || isRemovingBookmark ? (
+      {isAddingBookmark || isRemovingBookmark || isLoadingBookmarked ? (
         <LoadingSpinnerSmall size={24} color="var(--color-indigo-500)" />
       ) : (
         <HiBookmark

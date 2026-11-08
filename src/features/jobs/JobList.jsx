@@ -1,15 +1,14 @@
 /* eslint-disable no-constant-condition */
-import { unstable_HistoryRouter, useLocation } from "react-router";
+import clsx from "clsx";
 import Error from "../../pages/Error";
 import Button from "../../ui/Button";
 import GridBox from "../../ui/GridBox";
 import { LIMIT } from "../../utils/constants";
+import { useBookmarkedJobIds } from "../bookmarks/useBookmarkedJobIds";
 import JobCard from "./JobCard";
 import JobsSkeleton from "./JobsSkeleton";
-import { useJobs } from "./useJobs";
 import NoResults from "./NoResults";
-import clsx from "clsx";
-import { useBookmarks } from "../bookmarks/useBookmarks";
+import { useJobs } from "./useJobs";
 
 function JobList() {
   const {
@@ -27,7 +26,11 @@ function JobList() {
     isLoadingError,
   } = useJobs();
 
-  const { bookmarks, isLoadingBookmarks, bookmarksError } = useBookmarks();
+  const { bookmarkedJobIds, isLoadingBookmarked } = useBookmarkedJobIds();
+  const bookmarkedIds = new Set(
+    bookmarkedJobIds?.map((bookmarks) => bookmarks.jobId),
+  );
+  console.log(bookmarkedIds);
 
   const isInitialLoadingPaused = isPending && isPaused && failureReason;
   const hasNoResults = jobs.length === 0;
@@ -60,7 +63,14 @@ function JobList() {
         ) : hasNoResults ? (
           <NoResults />
         ) : (
-          jobs.map((job) => <JobCard job={job} key={job.id} />)
+          jobs.map((job) => (
+            <JobCard
+              job={job}
+              key={job.id}
+              isBookmarked={bookmarkedIds.has(job.id)}
+              isLoadingBookmarked={isLoadingBookmarked}
+            />
+          ))
         )}
         {isFetchingNextPage && <JobsSkeleton numCards={(LIMIT / 3) * 2} />}
       </GridBox>
