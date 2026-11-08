@@ -21,3 +21,15 @@ export async function addBookmark({ userId, jobId }) {
 
   if (error) throw error;
 }
+
+export async function removeBookmark({ userId, jobId }) {
+  const { data, error } = await supabase
+    .from("bookmarks")
+    .delete()
+    .eq(`user_id`, userId)
+    .eq("job_id", jobId)
+    .select();
+  console.log(data);
+
+  if (error) throw error;
+}

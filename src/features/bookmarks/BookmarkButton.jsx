@@ -6,9 +6,9 @@ import LoadingSpinnerSmall from "../../ui/LoadingSpinnerSmall";
 
 function BookmarkButton({ jobId }) {
   const {
-    addBookmark,
+    handleBookmarkClick,
     isAddingBookmark,
-    bookmarkError,
+    isRemovingBookmark,
     userId,
     isAuthenticated,
     isBookmarked,
@@ -18,11 +18,11 @@ function BookmarkButton({ jobId }) {
 
   return (
     <Button
-      className="absolute top-4 right-4 bg-transparent p-1.5! hover:bg-transparent"
-      onClick={() => addBookmark({ userId, jobId })}
-      disabled={isAddingBookmark}
+      className="absolute top-4 right-4 bg-transparent p-1.5! hover:bg-transparent disabled:bg-transparent"
+      onClick={() => handleBookmarkClick({ userId, jobId })}
+      disabled={isAddingBookmark || isRemovingBookmark}
     >
-      {isAddingBookmark ? (
+      {isAddingBookmark || isRemovingBookmark ? (
         <LoadingSpinnerSmall size={24} color="var(--color-indigo-500)" />
       ) : (
         <HiBookmark
