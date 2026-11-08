@@ -1,17 +1,33 @@
+import { normalizeObjectKeys } from "../utils/helpers";
 import { supabase } from "./supabase";
 
-export async function getBookmarks() {
-  const { data, error } = await supabase.from("bookmarks").select(
-    `
-      jobId:job_id,
-      userId:user_id,
-      bookmarkedAt:bookmarked_at
+export async function getBookmarks({ userId }) {
+  const { data, error } = await supabase
+    .from("bookmarks")
+    .select(
+      `
+      ...jobs!inner(
+      *,
+        ...companies!inner(
+         companyId:id,
+      companyName:name,
+      logoUrl:logo_url,
+      logoBgColor:logo_bg_color,
+      websiteUrl:website_url
+        )
+      )
     `,
-  );
+    )
+    .eq("user_id", userId);
 
   if (error) throw error;
 
-  return data;
+  const normalizedData = data.map((item) => ({
+    ...normalizeObjectKeys(item),
+    jobPosition: item.position,
+  }));
+
+  return normalizedData;
 }
 
 export async function addBookmark({ userId, jobId }) {
@@ -23,13 +39,11 @@ export async function addBookmark({ userId, jobId }) {
 }
 
 export async function removeBookmark({ userId, jobId }) {
-  const { data, error } = await supabase
+  const { error } = await supabase
     .from("bookmarks")
     .delete()
     .eq(`user_id`, userId)
-    .eq("job_id", jobId)
-    .select();
-  console.log(data);
+    .eq("job_id", jobId);
 
   if (error) throw error;
 }
@@ -46,8 +60,6 @@ export async function getBookmarkedJobIds({ userId }) {
     .eq("user_id", userId);
 
   if (error) throw error;
-
-  console.log(data);
 
   return data;
 }

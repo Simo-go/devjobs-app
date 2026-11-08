@@ -19,7 +19,5 @@ export function useBookmarkedJobIds() {
     enabled: isAuthenticated,
   });
 
-  console.log(bookmarkedJobIds);
-
   return { bookmarkedJobIds, isLoadingBookmarked, bookmarkedJobIdsError };
 }

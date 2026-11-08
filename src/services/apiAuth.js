@@ -15,7 +15,6 @@ export async function signUpUser(userData) {
   });
 
   if (error) throw error;
-  console.log(data, error);
 }
 
 export async function signInWithEmail({ email, password }) {

@@ -73,6 +73,7 @@ export async function getJobs({
   const normalizedData = data.map((item) => normalizeObjectKeys(item));
 
   if (normalizedData.length !== LIMIT) return { data: normalizedData };
+  console.log(normalizedData);
 
   const { id: nextCursorId, createdAt: nextCursorDate } = normalizedData.at(-1);
   const nextCursorRank = normalizedData.at(-1)?.rank ?? null;

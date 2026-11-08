@@ -10,7 +10,6 @@ export function useRemoveBookmark() {
     mutationFn: ({ userId, jobId }) => apiRemoveBookmark({ userId, jobId }),
     onSuccess(_, __, ___, context) {
       const queryClient = context.client;
-      console.log("invalidating bookmarks");
       return queryClient.invalidateQueries(["bookmarks"]);
     },
   });

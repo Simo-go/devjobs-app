@@ -30,7 +30,6 @@ function JobList() {
   const bookmarkedIds = new Set(
     bookmarkedJobIds?.map((bookmarks) => bookmarks.jobId),
   );
-  console.log(bookmarkedIds);
 
   const isInitialLoadingPaused = isPending && isPaused && failureReason;
   const hasNoResults = jobs.length === 0;
