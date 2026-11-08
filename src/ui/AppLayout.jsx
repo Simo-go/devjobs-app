@@ -12,10 +12,8 @@ function AppLayout() {
           <Navbar />
         </Container>
       </Header>
-      <Main className="grid place-items-center">
-        <Container>
-          <Outlet />
-        </Container>
+      <Main className="grid">
+        <Outlet />
       </Main>
     </div>
   );
