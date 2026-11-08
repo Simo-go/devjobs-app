@@ -9,8 +9,14 @@ export function useRemoveBookmark() {
   } = useMutation({
     mutationFn: ({ userId, jobId }) => apiRemoveBookmark({ userId, jobId }),
     onSuccess(_, __, ___, context) {
-      const queryClient = context.client;
-      return queryClient.invalidateQueries({ queryKey: ["bookmarks"] });
+      return Promise.all([
+        context.client.invalidateQueries({
+          queryKey: ["bookmarks"],
+        }),
+        context.client.invalidateQueries({
+          queryKey: ["bookmarkedJobIds"],
+        }),
+      ]);
     },
   });
 

@@ -26,8 +26,6 @@ function JobList() {
     isLoadingError,
   } = useJobs();
 
-  console.log(jobs);
-
   const { bookmarkedJobIds, isLoadingBookmarked } = useBookmarkedJobIds();
   const bookmarkedIds = new Set(
     bookmarkedJobIds?.map((bookmarks) => bookmarks.jobId),

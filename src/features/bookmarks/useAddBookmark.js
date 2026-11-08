@@ -9,8 +9,14 @@ export function useAddBookmark() {
   } = useMutation({
     mutationFn: ({ userId, jobId }) => apiAddBookmark({ userId, jobId }),
     onSuccess(_, __, ___, context) {
-      const queryClient = context.client;
-      return queryClient.invalidateQueries({ queryKey: ["bookmarks"] });
+      return Promise.all([
+        context.client.invalidateQueries({
+          queryKey: ["bookmarks"],
+        }),
+        context.client.invalidateQueries({
+          queryKey: ["bookmarkedJobIds"],
+        }),
+      ]);
     },
   });
 

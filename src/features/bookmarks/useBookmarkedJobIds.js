@@ -4,9 +4,7 @@ import useUser from "../Auth/useUser";
 import useAuth from "../Auth/useAuth";
 
 export function useBookmarkedJobIds() {
-  const { isAuthenticated } = useAuth();
-  const { user } = useUser();
-  const userId = user?.id;
+  const { isAuthenticated, userId } = useAuth();
 
   const {
     data: bookmarkedJobIds,

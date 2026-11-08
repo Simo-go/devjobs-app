@@ -1,5 +1,7 @@
+import ApplicationsLayout from "../features/applications/ApplicationsLayout";
+
 function Applications() {
-  return <div>APPLICATIONS</div>;
+  return <ApplicationsLayout />;
 }
 
 export default Applications;
