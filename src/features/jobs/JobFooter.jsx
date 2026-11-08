@@ -1,6 +1,7 @@
 import { createPortal } from "react-dom";
 import Button from "../../ui/Button";
 import Container from "../../ui/Container";
+import ApplyButton from "../applications/ApplyButton";
 
 function JobFooter({ job }) {
   const { position, companyName, applyUrl } = job;
@@ -18,16 +19,12 @@ function JobFooter({ job }) {
                 {companyName}
               </span>
             </div>
-            <Button
-              size="large"
-              variant="primary"
+            <ApplyButton
               className="text-preset-5! duration-400! xs:text-preset-4-bold!"
-              link
-              to={applyUrl}
-              target="_blank"
+              applyUrl={applyUrl}
             >
               Apply Now
-            </Button>
+            </ApplyButton>
           </Container>
         </div>,
         document.body,
@@ -41,16 +38,12 @@ function JobFooter({ job }) {
             {companyName}
           </span>
         </div>
-        <Button
-          size="large"
-          variant="primary"
+        <ApplyButton
           className="text-preset-5! duration-400! xs:text-preset-4-bold!"
-          link
-          to={applyUrl}
-          target="_blank"
+          applyUrl={applyUrl}
         >
           Apply Now
-        </Button>
+        </ApplyButton>
       </footer>
     </>
   );

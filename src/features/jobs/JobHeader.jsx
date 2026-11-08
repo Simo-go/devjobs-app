@@ -4,6 +4,8 @@ import JobLocation from "./JobLocation";
 import TimeAndContractType from "./TimeAndContractType";
 import { Link, useLocation, useNavigate } from "react-router";
 import { useEffect } from "react";
+import useAuth from "../Auth/useAuth";
+import ApplyButton from "../applications/ApplyButton";
 
 function JobHeader({ job }) {
   const { position, location, createdAt, contract, applyUrl } = job;
@@ -39,16 +41,10 @@ function JobHeader({ job }) {
           <h2 className="mb-1 text-preset-2 text-slate-900">{position}</h2>
           <JobLocation location={location} />
         </div>
-        <Button
-          size="large"
-          variant="primary"
+        <ApplyButton
+          applyUrl={applyUrl}
           className="hidden text-preset-4-bold font-bold md:block"
-          link
-          to={applyUrl}
-          target="_blank"
-        >
-          Apply Now
-        </Button>
+        />
       </div>
     </header>
   );
