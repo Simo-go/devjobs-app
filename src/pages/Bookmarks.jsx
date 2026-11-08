@@ -1,5 +1,11 @@
+import { useBookmarks } from "../features/bookmarks/useBookmarks";
+
 function Bookmarks() {
-  return <div>BOOKMARKS</div>;
+  const bookmarks = useBookmarks();
+
+  console.log(bookmarks);
+
+  return <div>BOOKMARKStest</div>;
 }
 
 export default Bookmarks;

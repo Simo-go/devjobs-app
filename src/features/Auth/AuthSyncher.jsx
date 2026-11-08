@@ -9,6 +9,8 @@ function AuthSyncher() {
   useEffect(
     function () {
       const { data } = supabase.auth.onAuthStateChange((event, session) => {
+        console.log(session, event);
+
         if (event === "SIGNED_OUT") {
           queryClient.setQueryData(["user"], null);
           queryClient.query({ queryKey: ["auth"], queryFn: getClaims });

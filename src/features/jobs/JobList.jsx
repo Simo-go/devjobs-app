@@ -9,6 +9,7 @@ import JobsSkeleton from "./JobsSkeleton";
 import { useJobs } from "./useJobs";
 import NoResults from "./NoResults";
 import clsx from "clsx";
+import { useBookmarks } from "../bookmarks/useBookmarks";
 
 function JobList() {
   const {
@@ -25,6 +26,8 @@ function JobList() {
     isFetchNextPageError,
     isLoadingError,
   } = useJobs();
+
+  const { bookmarks, isLoadingBookmarks, bookmarksError } = useBookmarks();
 
   const isInitialLoadingPaused = isPending && isPaused && failureReason;
   const hasNoResults = jobs.length === 0;
