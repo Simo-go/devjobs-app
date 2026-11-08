@@ -10,7 +10,7 @@ export function useBookmarkedJobIds() {
 
   const {
     data: bookmarkedJobIds,
-    ispending: isLoadingBookmarked,
+    isPending: isLoadingBookmarked,
     error: bookmarkedJobIdsError,
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
   } = useQuery({

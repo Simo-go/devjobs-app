@@ -7,6 +7,7 @@ function BookmarksLayout() {
 
   return (
     <BookmarksAndApplicationsLayout
+      pageName="bookmarks"
       data={bookmarks}
       isLoading={isLoadingBookmarks}
       error={bookmarksError}

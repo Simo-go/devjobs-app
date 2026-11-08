@@ -10,7 +10,7 @@ export function useAddBookmark() {
     mutationFn: ({ userId, jobId }) => apiAddBookmark({ userId, jobId }),
     onSuccess(_, __, ___, context) {
       const queryClient = context.client;
-      return queryClient.invalidateQueries(["bookmarks"]);
+      return queryClient.invalidateQueries({ queryKey: ["bookmarks"] });
     },
   });
 

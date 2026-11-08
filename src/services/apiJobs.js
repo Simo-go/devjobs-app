@@ -70,7 +70,11 @@ export async function getJobs({
 
   if (error) throw new Error(error.message);
 
-  const normalizedData = data.map((item) => normalizeObjectKeys(item));
+  const normalizedData = data.map((item) => {
+    const normalizedItem = normalizeObjectKeys(item);
+    const { name, ...rest } = normalizedItem;
+    return { ...rest, companyName: name };
+  });
 
   if (normalizedData.length !== LIMIT) return { data: normalizedData };
   console.log(normalizedData);
