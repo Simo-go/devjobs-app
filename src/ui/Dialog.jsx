@@ -36,7 +36,7 @@ function Dialog({ children }) {
 }
 
 Dialog.Button = function ({ size, children, className }) {
-  const { handleToggleDialog, isOpen } = useContext(DialogContext);
+  const { handleToggleDialog } = useContext(DialogContext);
 
   return (
     <Button
@@ -52,7 +52,16 @@ Dialog.Button = function ({ size, children, className }) {
   );
 };
 
-Dialog.Window = function ({ children }) {
+/**
+ * Similar function to a button but can be any element type instead. Button kept so that there's no need for refactoring currently.
+ */
+Dialog.Trigger = function ({ render }) {
+  const { handleToggleDialog } = useDialogContext();
+
+  return render(handleToggleDialog);
+};
+
+Dialog.Window = function ({ className, children }) {
   const { isOpen, handleToggleDialog } = useContext(DialogContext);
   const ref = useRef();
   const keys = useMemo(() => ["Escape"], []);
@@ -64,7 +73,7 @@ Dialog.Window = function ({ children }) {
     function () {
       if (!isOpen) return;
 
-      document.body.style.overflow = "hidden";
+      document.body.style.overflow = "hidden"; // disable scrolling ability
 
       return () => (document.body.style.overflow = "auto");
     },
@@ -75,7 +84,10 @@ Dialog.Window = function ({ children }) {
 
   return createPortal(
     <div className="fixed top-0 left-0 grid h-svh w-full place-items-center overflow-hidden bg-neutral-950/50 px-6">
-      <div className="w-full rounded-md bg-neutral-0 p-6" ref={ref}>
+      <div
+        className={clsx(className, "w-full rounded-md bg-neutral-0 p-6")}
+        ref={ref}
+      >
         {children}
       </div>
     </div>,

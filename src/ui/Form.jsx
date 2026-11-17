@@ -39,6 +39,16 @@ function Form({ className, children, id, handleSubmit, ref }) {
   );
 }
 
+Form.FileInput = function FileInput({ name }) {
+  const { formState, updateField, formName } = useContext(FormContext);
+
+  async function handleChosenFile(e) {
+    updateField(name, e.target.files[0]);
+  }
+
+  return <input type="file" onChange={handleChosenFile} form={formName} />;
+};
+
 Form.Input = function ({ id, className, onChange, ...props }) {
   const { formState, updateField, formName } = useContext(FormContext);
 

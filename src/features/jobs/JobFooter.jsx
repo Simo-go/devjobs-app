@@ -2,6 +2,7 @@ import { createPortal } from "react-dom";
 import Button from "../../ui/Button";
 import Container from "../../ui/Container";
 import ApplyButton from "../applications/ApplyButton";
+import Dialog from "../../ui/Dialog";
 
 function JobFooter({ job }) {
   const { position, companyName, applyUrl } = job;
@@ -19,12 +20,15 @@ function JobFooter({ job }) {
                 {companyName}
               </span>
             </div>
-            <ApplyButton
-              className="text-preset-5! duration-400! xs:text-preset-4-bold!"
-              applyUrl={applyUrl}
-            >
-              Apply Now
-            </ApplyButton>
+            <Dialog.Trigger
+              render={(onClick) => (
+                <ApplyButton
+                  onClick={onClick}
+                  applyUrl={applyUrl}
+                  className="text-preset-5! duration-400! xs:text-preset-4-bold!"
+                />
+              )}
+            />
           </Container>
         </div>,
         document.body,
@@ -38,12 +42,15 @@ function JobFooter({ job }) {
             {companyName}
           </span>
         </div>
-        <ApplyButton
-          className="text-preset-5! duration-400! xs:text-preset-4-bold!"
-          applyUrl={applyUrl}
-        >
-          Apply Now
-        </ApplyButton>
+        <Dialog.Trigger
+          render={(onClick) => (
+            <ApplyButton
+              onClick={onClick}
+              applyUrl={applyUrl}
+              className="text-preset-5! duration-400! xs:text-preset-4-bold!"
+            />
+          )}
+        />
       </footer>
     </>
   );

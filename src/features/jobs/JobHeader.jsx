@@ -6,6 +6,7 @@ import { Link, useLocation, useNavigate } from "react-router";
 import { useEffect } from "react";
 import useAuth from "../Auth/useAuth";
 import ApplyButton from "../applications/ApplyButton";
+import Dialog from "../../ui/Dialog";
 
 function JobHeader({ job }) {
   const { position, location, createdAt, contract, applyUrl } = job;
@@ -41,9 +42,14 @@ function JobHeader({ job }) {
           <h2 className="mb-1 text-preset-2 text-slate-900">{position}</h2>
           <JobLocation location={location} />
         </div>
-        <ApplyButton
-          applyUrl={applyUrl}
-          className="hidden text-preset-4-bold font-bold md:block"
+        <Dialog.Trigger
+          render={(onClick) => (
+            <ApplyButton
+              onClick={onClick}
+              applyUrl={applyUrl}
+              className="hidden text-preset-4-bold font-bold md:block"
+            />
+          )}
         />
       </div>
     </header>
