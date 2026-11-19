@@ -14,7 +14,7 @@ function JobBox({ job }) {
         <hr className="-mx-6 mb-10 hidden text-slate-300/30 md:block" />
         <JobFooter job={job} />
         <Dialog.Window className="max-w-182.5">
-          <ApplicationForm job={job} />
+          <ApplicationForm position={job.position} />
         </Dialog.Window>
       </Dialog>
     </Card>

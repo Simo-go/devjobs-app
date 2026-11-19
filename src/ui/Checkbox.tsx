@@ -1,6 +1,8 @@
 import clsx from "clsx";
+import { ComponentPropsWithRef } from "react";
 
-function Checkbox({ className, ...props }) {
+type checkboxProps = ComponentPropsWithRef<"input">;
+function Checkbox({ className, ...props }: checkboxProps) {
   return (
     <input
       {...props}

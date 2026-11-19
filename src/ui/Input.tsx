@@ -1,6 +1,8 @@
 import clsx from "clsx";
+import { ComponentPropsWithRef } from "react";
 
-function Input({ className, ref, ...props }) {
+type InputProps = ComponentPropsWithRef<"input">;
+function Input({ className, ref, ...props }: InputProps) {
   return (
     <input
       className={clsx(
