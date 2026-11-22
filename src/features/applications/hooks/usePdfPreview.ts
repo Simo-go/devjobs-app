@@ -5,18 +5,13 @@ import { getDocument, GlobalWorkerOptions } from "pdfjs-dist";
 
 GlobalWorkerOptions.workerSrc = workerUrl;
 
-function usePdfPreview() {
-  const {
-    formState: { cv },
-  } = useFormContext();
+function usePdfPreview(cv: File) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [cvHasLoaded, setCvHasLoaded] = useState(false);
 
   useEffect(
     function () {
       async function loadPdfPreview() {
-        if (!(cv instanceof File) || !canvasRef.current) return;
-
         // get pdf doc preview page
         const page = await getPdfPage(1, cv);
 
@@ -54,7 +49,7 @@ function usePdfPreview() {
     [cv],
   );
 
-  return { cvHasLoaded, canvasRef };
+  return { cvHasLoaded, canvasRef, setCvHasLoaded };
 }
 export default usePdfPreview;
 
