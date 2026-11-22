@@ -7,6 +7,7 @@ import React, {
   ComponentPropsWithoutRef,
   ComponentPropsWithRef,
   createContext,
+  CustomComponentPropsWithRef,
   FormHTMLAttributes,
   LabelHTMLAttributes,
   ReactNode,
@@ -28,7 +29,7 @@ type FormContextValue = {
   onSubmit: (e: React.SubmitEvent<HTMLFormElement>) => void;
 };
 
-type FormState = Record<string, string | boolean | File>;
+type FormState = Record<string, string | boolean | File | undefined>;
 type FormStateValue = FormState[string];
 
 type UpdateFieldFn = (name: string, value: FormStateValue) => void;
@@ -72,7 +73,9 @@ Form.FileInput = function FileInput({ name, ...props }: FileInputProps) {
 
   async function handleChosenFile(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.currentTarget.files?.[0];
-    if (file) updateField(name, file);
+    if (file) {
+      updateField(name, file);
+    }
   }
 
   return (
@@ -130,6 +133,26 @@ Form.Submit = function ({ children, ...props }: SubmitProps) {
 
   return (
     <Button {...props} type="submit" form={formName}>
+      {children}
+    </Button>
+  );
+};
+
+type ClearProps = { name: string; onClick?: (name: string) => void } & Extract<
+  CustomComponentPropsWithRef<typeof Button>,
+  { link?: false }
+>;
+Form.ClearField = function ({ children, name, onClick, ...props }: ClearProps) {
+  const { updateField, formState } = useFormContext();
+
+  function handleClearField(e: React.MouseEvent<HTMLButtonElement>) {
+    updateField(name, undefined);
+    onClick?.(name);
+    e.stopPropagation();
+  }
+
+  return (
+    <Button onClick={handleClearField} {...props}>
       {children}
     </Button>
   );
