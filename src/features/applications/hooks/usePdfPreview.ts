@@ -26,6 +26,7 @@ function usePdfPreview(cv: File) {
         // calculate resolution (based on dpr)
         const outputScale = window.devicePixelRatio || 1;
         const canvas = canvasRef.current;
+        if (!canvas) return;
         canvas.width = Math.ceil(outputScale * viewport.width);
         canvas.height = Math.ceil(outputScale * viewport.height);
 

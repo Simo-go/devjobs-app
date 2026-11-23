@@ -20,6 +20,10 @@ function ApplicationForm({ position }: Pick<Job, "position">) {
         <h2 className="text-preset-2">Apply for {position}</h2>
       </Form.Header>
       <CVInput />
+      <Form.InputContainer>
+        <Form.Label>Motivation</Form.Label>
+        <Form.Input></Form.Input>
+      </Form.InputContainer>
     </Form>
   );
 }

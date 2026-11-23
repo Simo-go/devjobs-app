@@ -8,6 +8,7 @@ import FilePreview from "./FilePreview";
 function CVInput() {
   const { formState } = useFormContext();
   const cv = formState.cv;
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   if (typeof cv == "boolean" || typeof cv == "string") return;
 
@@ -15,8 +16,18 @@ function CVInput() {
     <Form.InputContainer>
       <h2 className="mb-2 text-preset-4-bold">CV</h2>
       <Form.Label htmlFor="cv">
-        {!cv ? <AddCVFile /> : <FilePreview cv={cv} />}
-        <Form.FileInput id="cv" name="cv" hidden accept=".pdf" />
+        {!cv ? (
+          <AddCVFile />
+        ) : (
+          <FilePreview cv={cv} fileInputRef={fileInputRef} />
+        )}
+        <Form.FileInput
+          id="cv"
+          name="cv"
+          hidden
+          accept=".pdf"
+          ref={fileInputRef}
+        />
       </Form.Label>
     </Form.InputContainer>
   );

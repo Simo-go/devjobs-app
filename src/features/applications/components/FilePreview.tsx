@@ -2,12 +2,23 @@ import { HiMinusCircle } from "react-icons/hi2";
 import Form from "../../../ui/Form";
 import usePdfPreview from "../hooks/usePdfPreview";
 
-function FilePreview({ cv }: { cv: File }) {
+function FilePreview({
+  cv,
+  fileInputRef,
+}: {
+  cv: File;
+  fileInputRef: HTMLInputElement;
+}) {
   const { canvasRef, cvHasLoaded, setCvHasLoaded } = usePdfPreview(cv);
 
   const lastDot = cv?.name.lastIndexOf(".");
   const name = cv?.name.slice(0, lastDot).trimEnd();
   const extension = cv?.name.slice(lastDot);
+
+  function handleClearField() {
+    setCvHasLoaded(false);
+    fileInputRef.value = "";
+  }
 
   return (
     <>
@@ -21,7 +32,7 @@ function FilePreview({ cv }: { cv: File }) {
             name="cv"
             variant="outline"
             className="absolute top-1 right-1"
-            onClick={() => setCvHasLoaded(false)}
+            onClick={handleClearField}
           >
             <HiMinusCircle
               className="text-red-500 hover:text-red-500/70"

@@ -76,6 +76,8 @@ Form.FileInput = function FileInput({ name, ...props }: FileInputProps) {
     if (file) {
       updateField(name, file);
     }
+
+    console.log(e.target.value);
   }
 
   return (
@@ -89,6 +91,7 @@ Form.Input = function ({ id, className, onChange, ...props }: InputProps) {
 
   if (formState[id] instanceof File || typeof formState[id] === "boolean")
     return;
+
   return (
     <Input
       id={id}
