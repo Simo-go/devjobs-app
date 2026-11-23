@@ -1,14 +1,9 @@
 import { HiMinusCircle } from "react-icons/hi2";
 import Form from "../../../ui/Form";
 import usePdfPreview from "../hooks/usePdfPreview";
+import { RefObject } from "react";
 
-function FilePreview({
-  cv,
-  fileInputRef,
-}: {
-  cv: File;
-  fileInputRef: HTMLInputElement;
-}) {
+function FilePreview({ cv, onClear }: { cv: File; onClear: () => void }) {
   const { canvasRef, cvHasLoaded, setCvHasLoaded } = usePdfPreview(cv);
 
   const lastDot = cv?.name.lastIndexOf(".");
@@ -17,7 +12,7 @@ function FilePreview({
 
   function handleClearField() {
     setCvHasLoaded(false);
-    fileInputRef.value = "";
+    onClear();
   }
 
   return (

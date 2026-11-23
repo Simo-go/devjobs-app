@@ -29,3 +29,8 @@ export type Company = {
 };
 
 export type JobWithCompany = Job & Omit<Company, "id">;
+
+export type FormValues = {
+  cv: FileList;
+  motivation: string;
+};

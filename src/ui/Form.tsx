@@ -38,7 +38,7 @@ const FormContext = createContext<FormContextValue | null>(null);
 
 // Note: the idea here is to keep the form state shared and to all elements to be very customizable, (also in terms of css w/ tailwind!)
 type FormProps = {
-  handleSubmit: (e: FormState) => void;
+  handleSubmit: (e: React.SubmitEvent<HTMLFormElement>) => void;
 } & ComponentPropsWithRef<"form">;
 
 function Form({ className, children, id, handleSubmit, ref }: FormProps) {
@@ -55,7 +55,7 @@ function Form({ className, children, id, handleSubmit, ref }: FormProps) {
 
   function onSubmit(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
-    handleSubmit(formState);
+    handleSubmit(e);
   }
 
   return (
@@ -67,21 +67,30 @@ function Form({ className, children, id, handleSubmit, ref }: FormProps) {
   );
 }
 
-type FileInputProps = { name: string } & ComponentPropsWithRef<"input">;
-Form.FileInput = function FileInput({ name, ...props }: FileInputProps) {
+type FileInputProps = { id: string } & ComponentPropsWithRef<"input">;
+Form.FileInput = function FileInput({
+  id,
+  onChange,
+  ...props
+}: FileInputProps) {
   const { formState, updateField, formName } = useFormContext();
 
   async function handleChosenFile(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.currentTarget.files?.[0];
     if (file) {
-      updateField(name, file);
+      updateField(id, file);
+      onChange?.(e);
     }
-
-    console.log(e.target.value);
   }
 
   return (
-    <input type="file" {...props} onChange={handleChosenFile} form={formName} />
+    <input
+      id={id}
+      type="file"
+      {...props}
+      onChange={handleChosenFile}
+      form={formName}
+    />
   );
 };
 
@@ -104,6 +113,42 @@ Form.Input = function ({ id, className, onChange, ...props }: InputProps) {
       }}
       form={formName}
     />
+  );
+};
+
+type TextareaProps = {
+  id: string;
+} & ComponentPropsWithRef<"textarea">;
+Form.TextArea = function TextArea({
+  id,
+  children,
+  className,
+  onChange,
+  ...props
+}: TextareaProps) {
+  const { formState, updateField, formName } = useFormContext();
+
+  function handleChange(
+    e: React.ChangeEvent<HTMLTextAreaElement, HTMLTextAreaElement>,
+  ) {
+    onChange?.(e);
+    updateField(id, e.target.value);
+  }
+
+  if (formState[id] instanceof File || typeof formState[id] === "boolean")
+    return;
+
+  return (
+    <textarea
+      {...props}
+      className={className}
+      id={id}
+      value={formState[id] ?? ""}
+      onChange={handleChange}
+      form={formName}
+    >
+      {children}
+    </textarea>
   );
 };
 
@@ -155,7 +200,7 @@ Form.ClearField = function ({ children, name, onClick, ...props }: ClearProps) {
   }
 
   return (
-    <Button onClick={handleClearField} {...props}>
+    <Button onClick={handleClearField} type="button" {...props}>
       {children}
     </Button>
   );

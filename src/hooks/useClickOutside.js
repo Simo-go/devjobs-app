@@ -10,8 +10,6 @@ export function useClickOutside(capture = true, ref, handler) {
           e.target.closest("button")
         )
           return;
-        console.log(e.target);
-
         console.log("closing on hit enter");
 
         handler();
