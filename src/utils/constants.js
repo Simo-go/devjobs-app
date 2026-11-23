@@ -1,4 +1,5 @@
 export const LIMIT = 9;
+export const MIN_WORD_COUNT = 80;
 
 export const validations = {
   firstName: {

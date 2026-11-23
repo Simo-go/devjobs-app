@@ -14,10 +14,12 @@ function CVInput({
   onClear,
   control,
   ref: inputRef,
+  errorMsg,
   ...register
 }: {
   onClear: () => void;
   control: Control<FormValues, any, FormValues>;
+  errorMsg?: string;
 } & UseFormRegisterReturn<"cv">) {
   const fileList = useWatch({
     name: "cv",
@@ -35,26 +37,31 @@ function CVInput({
   }
 
   return (
-    <Form.InputContainer>
-      <h2 className="mb-2 text-preset-3">CV</h2>
-      <Form.Label htmlFor="cv">
-        {!cv || !isPdfType ? (
-          <AddCVFile />
-        ) : (
-          <FilePreview cv={cv} onClear={handleClear} />
-        )}
-        <Form.FileInput
-          id="cv"
-          hidden
-          accept=".pdf"
-          ref={(ref) => {
-            fileInputRef.current = ref;
-            inputRef(ref);
-          }}
-          {...register}
-        />
-      </Form.Label>
-    </Form.InputContainer>
+    <>
+      <Form.Container>
+        <div className="flex items-center justify-between">
+          <h2 className="mb-2 text-preset-3">CV</h2>
+          {errorMsg && <Form.Error>{errorMsg}</Form.Error>}
+        </div>
+        <Form.Label htmlFor="cv">
+          {!cv || !isPdfType ? (
+            <AddCVFile />
+          ) : (
+            <FilePreview cv={cv} onClear={handleClear} />
+          )}
+          <Form.FileInput
+            id="cv"
+            hidden
+            accept=".pdf"
+            ref={(ref) => {
+              fileInputRef.current = ref;
+              inputRef(ref);
+            }}
+            {...register}
+          />
+        </Form.Label>
+      </Form.Container>
+    </>
   );
 }
 

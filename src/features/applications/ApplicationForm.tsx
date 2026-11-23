@@ -6,6 +6,8 @@ import { FormValues, Job } from "./types";
 import CVInput from "./components/CVInput";
 import { useForm } from "react-hook-form";
 import MotivationInput from "./components/MotivationInput";
+import { getWordCount } from "../../utils/helpers";
+import { MIN_WORD_COUNT } from "../../utils/constants";
 
 function ApplicationForm({ position }: Pick<Job, "position">) {
   const { handleCloseDialog } = useDialogContext();
@@ -42,7 +44,6 @@ function ApplicationForm({ position }: Pick<Job, "position">) {
           },
           validate: (files) => {
             const file = files.item(0);
-            console.log(file);
             if (!file) return true;
 
             return (
@@ -52,9 +53,26 @@ function ApplicationForm({ position }: Pick<Job, "position">) {
         })}
         onClear={() => resetField("cv")}
         control={control}
+        errorMsg={errors.cv?.message}
       />
-      <MotivationInput {...register("motivation")} />
-      <Form.Submit>Submit</Form.Submit>
+      <MotivationInput
+        {...register("motivation", {
+          required: {
+            value: true,
+            message: "Provide a motivation first.",
+          },
+          validate: (motivationStr) =>
+            getWordCount(motivationStr) >= MIN_WORD_COUNT ||
+            `Please provide at least ${MIN_WORD_COUNT} words.`,
+        })}
+        control={control}
+        errorMsg={errors.motivation?.message}
+      />
+      <Form.Container className="flex justify-end">
+        <Form.Submit variant="primary" size="large">
+          Submit
+        </Form.Submit>
+      </Form.Container>
     </Form>
   );
 }

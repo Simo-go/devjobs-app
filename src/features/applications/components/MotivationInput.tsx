@@ -1,15 +1,44 @@
 import { ComponentPropsWithRef, TextareaHTMLAttributes } from "react";
 import Form from "../../../ui/Form";
-import { UseFormRegisterReturn, UseFormReturn } from "react-hook-form";
+import {
+  Control,
+  UseFormRegisterReturn,
+  UseFormReturn,
+  useWatch,
+} from "react-hook-form";
 import { FormValues } from "../types";
+import { getWordCount } from "../../../utils/helpers";
+import { MIN_WORD_COUNT } from "../../../utils/constants";
 
 function MotivationInput({
   onChange,
+  control,
+  errorMsg,
   ...register
-}: UseFormRegisterReturn<"motivation">) {
+}: {
+  control: Control<FormValues>;
+  errorMsg: string | undefined;
+} & UseFormRegisterReturn<"motivation">) {
+  const motivation = useWatch<FormValues, "motivation", FormValues>({
+    name: "motivation",
+    control: control,
+  });
+  const wordCount = getWordCount(motivation);
+  const showWordCount = wordCount <= MIN_WORD_COUNT;
+
   return (
     <Form.Container>
-      <Form.Label className="mb-2 block text-preset-3">Motivation</Form.Label>
+      <div className="flex items-center justify-between">
+        <Form.Label className="mb-2 block text-preset-3">Motivation</Form.Label>
+        <div className="text-right">
+          <Form.Error className="block">{errorMsg}</Form.Error>
+          {showWordCount && (
+            <span className="text-preset-5 font-normal text-slate-300">
+              Words remaining: {MIN_WORD_COUNT - wordCount}
+            </span>
+          )}
+        </div>
+      </div>
       <div className="rounded-md border-2 border-slate-100 transition-[box-shadow,border] focus-within:border-transparent focus-within:ring-2 focus-within:ring-indigo-300">
         <Form.TextArea
           onChange={onChange}

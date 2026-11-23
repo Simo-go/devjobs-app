@@ -87,3 +87,9 @@ export function convertSnakecaseToCamelcase(str: string) {
     )
     .join("");
 }
+
+export function getWordCount(str: string | undefined) {
+  if (!str) return 0;
+
+  return str.split(" ").reduce((acc, word) => ++acc, 0);
+}
